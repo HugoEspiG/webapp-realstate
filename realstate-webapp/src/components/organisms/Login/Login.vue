@@ -1,58 +1,66 @@
 <template>
-  <form @submit.prevent="login">
-    <div class="mb-3">
-      <Input
-        name="username"
-        type="text"
-        label="Nombre de usuario"
-        :model="loginForm.username"
-        :validations="usernameValidations"
-      />
+  <form @submit.prevent="submitForm" class='flex-row'>
+    <div class="form-floating m-3 col-md-4 text-center">
+      <input v-model.trim="state.user" type="text" id="user" class="form-control" placeholder="Username"/>
+      <small v-if="v$.user.$error" class="error-message">
+        {{ v$.user.$errors[0].$message }}
+      </small>
+      <label for="user">Username</label>
     </div>
-    <div class="mb-3">
-      <Input
-        name="password"
-        type="password"
-        label="Contraseña"
-        :model="loginForm.password"
-        :validations="passwordValidations"
-      />
+    <div class="form-floating m-3 col-md-4">
+      <input v-model.trim="state.password" type="password" id="password" class="form-control" placeholder="Password"/>
+      <small v-if="v$.password.$error" class="error-message">
+        {{ v$.password.$errors[0].$message }}
+      </small>
+      <label for="password">Password</label>
     </div>
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+
+    <button type="submit" class="btn btn-primary center">Submit</button>
   </form>
 </template>
 
 <script>
-import Input from '../../atoms/Input/Input.vue';
-import { required, minLength, maxLength } from '@vuelidate/validators';
+import { required, email, minLength, maxLength } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import { reactive, computed } from 'vue';
 
 export default {
   name: 'Login',
-  components: {
-    Input,
-  },
-  data() {
+  setup() {
+    const state = reactive({
+      user: '',
+      password: ''
+    })
+    const rules = computed(() => {
+      return {
+        user: { required, email },
+        password: { required, minLength: minLength(6), maxLength: maxLength(20) }
+      }
+    })
+    const v$ = useVuelidate(rules, state)
+
     return {
-      loginForm: {
-        username: '',
-        password: '',
-      },
-      usernameValidations: {
-        required: value => !!value || 'El nombre de usuario es requerido',
-        minLength: minLength(4, 'El nombre de usuario debe tener al menos 4 caracteres'),
-        maxLength: maxLength(10, 'El nombre de usuario no puede tener más de 10 caracteres'),
-      },
-      passwordValidations: {
-        required: true,
-        minLength: 6,
-      },
-    };
+      state,
+      v$
+    }
   },
   methods: {
-    login() {
-      // Lógica para realizar la autenticación
-      // Puedes acceder a los valores de entrada en this.loginForm.username y this.loginForm.password
-    },
-  },
+    submitForm() {
+      this.v$.$validate()
+      if (!this.v$.$error) {
+        alert("Completo")
+      } else {
+        alert("Incompletto")
+      }
+      console.log('Username:', this.state.user);
+      console.log('Password:', this.state.password);
+    }
+  }
 };
 </script>
+
+<style>
+.error-message {
+  color: red;
+}
+</style>
