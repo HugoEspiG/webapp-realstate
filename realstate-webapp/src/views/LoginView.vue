@@ -3,5 +3,7 @@ import Login from '../components/organisms/Login/Login.vue';
 </script>
 
 <template>
-<Login></Login>
+        <div class="container">
+            <Login></Login>
+        </div>
 </template>

@@ -1,38 +1,44 @@
 <template>
-    <button :class="[customClass, 'btn']">
-        <slot></slot>
+    <button :class="classes" v-bind="$attrs">
+      <slot></slot>
     </button>
-</template>
+  </template>
   
-  
-<script>
-export default {
+  <script>
+  export default {
     name: 'Button',
     props: {
-        customClass: {
-            type: String,
-            default: ''
-        }
+      variant: {
+        type: String,
+        default: 'primary',
+        validator: (value) =>
+          ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'custom', 'outline-primary', 'outline-secundary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info', 'outline-light', 'dark'].includes(value)
+      },
+      size: {
+        type: String,
+        default: 'md',
+        validator: (value) => ['sm', 'md', 'lg'].includes(value)
+      },
+      className: {
+        type: String,
+        default: ''
+      }
+    },
+    computed: {
+      classes() {
+        return [
+          'btn',
+          `btn-${this.variant}`,
+          `btn-${this.size}`,
+          this.className
+        ];
+      }
     }
-}
-</script>
+  };
+  </script>
   
-<style scoped>
-.button {
-    /* Estilos para el botón */
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-.button:focus {
-    outline: none;
-}
-</style>
+  <style scoped lang="scss">
+ 
+  </style>
+  
   

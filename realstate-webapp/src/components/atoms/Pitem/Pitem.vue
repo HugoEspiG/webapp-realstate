@@ -1,29 +1,38 @@
 <template>
-    <p :class="[customClass, 'Pitem']">
-      <slot></slot>
-    </p>
-  </template>
-  
-  <script>
-  export default {
-    name: 'Pitem',
-    props: {
-      customClass: {
-        type: String,
-        default: ''
-      }
+  <p :class="classes" v-bind="$attrs">
+    <slot></slot>
+  </p>
+</template>
+
+<script>
+export default {
+  name: 'PItem',
+  props: {
+    variant: {
+      type: String,
+      default: ''
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    classes() {
+      return [
+        this.variant,
+        `text-${this.color}`,
+        this.className
+      ];
     }
   }
-  </script>
-  
-  <style scoped>
-  .Pitem {
-    /* Estilos personalizados para el átomo de párrafo */
-    /* font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
-  </style>
-   
-  
+};
+</script>
+
+<style scoped>
+/* Estilos personalizados */
+</style>

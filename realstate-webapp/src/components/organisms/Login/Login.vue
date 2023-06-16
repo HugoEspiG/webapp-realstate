@@ -1,31 +1,35 @@
 <template>
-  <form @submit.prevent="submitForm" class='flex-row'>
-    <div class="form-floating m-3 col-md-4 text-center">
-      <input v-model.trim="state.user" type="text" id="user" class="form-control" placeholder="Username"/>
-      <small v-if="v$.user.$error" class="error-message">
-        {{ v$.user.$errors[0].$message }}
-      </small>
-      <label for="user">Username</label>
+  <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
+    <div class="card-body">
+      <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
+      <div class="col">
+        <form @submit.prevent="submitForm" id="form-log" class="mt-5 col mx-4">
+          <InputItem v-model.trim="state.user" type="text" id="user" placeholder="Username" label="Username"
+            :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
+          <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password" label="Password"
+            :error="v$.password.$error" errorMessage="El campo no puede estar vacío" />
+          <Button variant="primary" size="lg" class="mt-3 mw-25" type="submit" form="form-log">Submit</Button>
+        </form>
+      </div>
     </div>
-    <div class="form-floating m-3 col-md-4">
-      <input v-model.trim="state.password" type="password" id="password" class="form-control" placeholder="Password"/>
-      <small v-if="v$.password.$error" class="error-message">
-        {{ v$.password.$errors[0].$message }}
-      </small>
-      <label for="password">Password</label>
-    </div>
-
-    <button type="submit" class="btn btn-primary center">Submit</button>
-  </form>
+  </div>
 </template>
 
 <script>
+import InputItem from '../../atoms/InputItem/InputItem.vue'
+import Button from '../../atoms/Button/Button.vue'
+import PItem from '../../atoms/PItem/PItem.vue'
 import { required, email, minLength, maxLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { reactive, computed } from 'vue';
 
 export default {
   name: 'Login',
+  components: {
+    Button,
+    PItem,
+    InputItem
+  },
   setup() {
     const state = reactive({
       user: '',
@@ -50,7 +54,7 @@ export default {
       if (!this.v$.$error) {
         alert("Completo")
       } else {
-        alert("Incompletto")
+        alert("Incompleto")
       }
       console.log('Username:', this.state.user);
       console.log('Password:', this.state.password);
@@ -60,7 +64,8 @@ export default {
 </script>
 
 <style>
-.error-message {
-  color: red;
+.custom-tam {
+  width: 35%;
 }
 </style>
+
