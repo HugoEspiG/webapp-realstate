@@ -58,6 +58,8 @@ export default {
       }
       console.log('Username:', this.state.user);
       console.log('Password:', this.state.password);
+      
+
     }
   }
 };
