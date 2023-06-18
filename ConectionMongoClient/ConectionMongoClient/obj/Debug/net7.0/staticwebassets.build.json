@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "bVojzYcy6J9UzkNbykQjiX9/DgV7mnE7MBNklnzUAiM=",
+  "Source": "ConectionMongoClient",
+  "BasePath": "_content/ConectionMongoClient",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
