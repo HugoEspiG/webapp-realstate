@@ -182,6 +182,24 @@
           }
         }
       },
+      "mongocsharpdriver/2.19.2": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.19.2",
+          "MongoDB.Driver": "2.19.2",
+          "MongoDB.Driver.Core": "2.19.2"
+        },
+        "compile": {
+          "lib/netstandard2.1/MongoDB.Driver.Legacy.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Driver.Legacy.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MongoDB.Bson/2.19.2": {
         "type": "package",
         "dependencies": {
@@ -982,6 +1000,25 @@
         "version.txt"
       ]
     },
+    "mongocsharpdriver/2.19.2": {
+      "sha512": "dv3RL9nKiQkjLRoqR3VxmxURkYUM9OmM4NmklqrMvT3KjW5SOq6hBYE4JgXMMT3UOjbevStbBLBMeqfBKCvkJQ==",
+      "type": "package",
+      "path": "mongocsharpdriver/2.19.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net472/MongoDB.Driver.Legacy.dll",
+        "lib/net472/MongoDB.Driver.Legacy.xml",
+        "lib/netstandard2.0/MongoDB.Driver.Legacy.dll",
+        "lib/netstandard2.0/MongoDB.Driver.Legacy.xml",
+        "lib/netstandard2.1/MongoDB.Driver.Legacy.dll",
+        "lib/netstandard2.1/MongoDB.Driver.Legacy.xml",
+        "mongocsharpdriver.2.19.2.nupkg.sha512",
+        "mongocsharpdriver.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "MongoDB.Bson/2.19.2": {
       "sha512": "YpwSLKillPRj+BYEZU0dFgVHdCuj7uGIkLcyEc5a9zwJQYMbZkAc2CRVzobnDY9HMSCtyefXnkrz9CQ6C91KQA==",
       "type": "package",
@@ -1424,7 +1461,8 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 7.0.7",
       "Microsoft.AspNetCore.OpenApi >= 7.0.5",
       "MongoDB.Driver >= 2.19.2",
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "mongocsharpdriver >= 2.19.2"
     ]
   },
   "packageFolders": {
@@ -1482,6 +1520,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "mongocsharpdriver": {
+            "target": "Package",
+            "version": "[2.19.2, )"
           }
         },
         "imports": [

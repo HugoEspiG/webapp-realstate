@@ -19,6 +19,7 @@
 import InputItem from '../../atoms/InputItem/InputItem.vue'
 import Button from '../../atoms/Button/Button.vue'
 import PItem from '../../atoms/PItem/PItem.vue'
+import axios from 'axios';
 import { required, email, minLength, maxLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { reactive, computed } from 'vue';
@@ -51,13 +52,13 @@ export default {
   methods: {
     submitForm() {
       this.v$.$validate()
-      if (!this.v$.$error) {
-        alert("Completo")
+      if (!this.v$.$error && !this.v$.$invalid) {;
+        axios.get(variables.MONGOAPI + "Client/Login?login="+this.state.user+"&password="+this.state.password, {}).then((response) => {
+          console.log(response.data);
+        })
       } else {
-        alert("Incompleto")
       }
-      console.log('Username:', this.state.user);
-      console.log('Password:', this.state.password);
+
       
 
     }

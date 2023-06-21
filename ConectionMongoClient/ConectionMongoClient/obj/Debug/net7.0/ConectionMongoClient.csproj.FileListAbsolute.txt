@@ -98,3 +98,4 @@ D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\Con
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ConectionMongoClient.pdb
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ConectionMongoClient.genruntimeconfig.cache
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ref\ConectionMongoClient.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\MongoDB.Driver.Legacy.dll

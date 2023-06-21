@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JKPF/zQ11QrjdOr7Sm/dezDr+XGWIuUPzyrjRudXt63IlizRVyVVxctq1OiR0bIYQbdGDJWHJFeok/hv7YRwkQ==",
+  "dgSpecHash": "98izBvCsIT1IZCRQNFbTV82cV4rCTgJIIU/tZa3/dyJ/Vi8i9BDD7Bh6GBtJJaXsqs0uIMavSwnQ7Tt0ic4ovw==",
   "success": true,
   "projectFilePath": "D:\\Users\\Velasquez\\Documents\\RealState\\webapp-realstate\\ConectionMongoClient\\ConectionMongoClient\\ConectionMongoClient.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\Velasquez\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Velasquez\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\Velasquez\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\Velasquez\\.nuget\\packages\\mongocsharpdriver\\2.19.2\\mongocsharpdriver.2.19.2.nupkg.sha512",
     "C:\\Users\\Velasquez\\.nuget\\packages\\mongodb.bson\\2.19.2\\mongodb.bson.2.19.2.nupkg.sha512",
     "C:\\Users\\Velasquez\\.nuget\\packages\\mongodb.driver\\2.19.2\\mongodb.driver.2.19.2.nupkg.sha512",
     "C:\\Users\\Velasquez\\.nuget\\packages\\mongodb.driver.core\\2.19.2\\mongodb.driver.core.2.19.2.nupkg.sha512",

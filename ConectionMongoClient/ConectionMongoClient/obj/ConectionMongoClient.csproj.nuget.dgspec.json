@@ -56,6 +56,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "mongocsharpdriver": {
+              "target": "Package",
+              "version": "[2.19.2, )"
             }
           },
           "imports": [

@@ -1,7 +1,10 @@
 ﻿using ConectionMongoClient.Models;
+using DnsClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace ConectionMongoClient.Controllers
 {
@@ -12,7 +15,23 @@ namespace ConectionMongoClient.Controllers
         private readonly IConfiguration _configuration;
         public ClientController(IConfiguration configuration)
         {
-            _configuration = configuration; 
+            _configuration = configuration;
+        }
+
+        [HttpGet]
+        [Route("login")]
+        public JsonResult Login(string login, string password)
+        {
+            Client client = new Client();
+            client.Email = login;
+            client.Password = password;
+            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
+            var filter = Builders<Client>.Filter.Eq("Email", client.Email);
+            filter &= Builders<Client>.Filter.Eq("Password", client.Password);
+            var lastclient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList();
+
+
+            return new JsonResult(lastclient);
         }
 
         [HttpGet]
@@ -20,7 +39,7 @@ namespace ConectionMongoClient.Controllers
         {
             MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
             var dbList = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").AsQueryable();
-            return new JsonResult(dbList);  
+            return new JsonResult(dbList);
         }
         [HttpPost]
         public JsonResult Post(Client client)
@@ -30,6 +49,25 @@ namespace ConectionMongoClient.Controllers
             client.ClientId = lastClient + 1;
             dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").InsertOne(client);
             return new JsonResult("Addes Succesfully");
+        }
+        [HttpPost]
+        [Route("Register")]
+        public JsonResult Register(Client client)
+        {
+            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
+            var filter = Builders<Client>.Filter.Eq("Email", client.Email);
+            var check = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList().Count();
+            
+            if (check > 0)
+            {
+                return new JsonResult("This e-mail address is already registered.");
+            }
+
+            var lastClient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").AsQueryable().Count();
+            client.ClientId = lastClient + 1;
+            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").InsertOne(client);
+            return new JsonResult("Successfully added");
+
         }
 
         [HttpPut]
