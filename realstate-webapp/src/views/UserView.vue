@@ -4,6 +4,6 @@ import Register from '../components/organisms/Register/Register.vue';
 
 <template>
         <div class="container">
-            <Register></Register>
+            <p>{{ $route.params.id }}</p>
         </div>
 </template>

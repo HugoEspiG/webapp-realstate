@@ -7,7 +7,7 @@
             <InputItem v-model.trim="state.user" type="text" id="user" placeholder="Username" label="Username"
               :error="v$.user.$error" :errorMessage="v$.$errors==undefined?'':v$.$errors[0]" />
             <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password" label="Password"
-              :error="v$.password.$error" :errorMessage="v$.$errors==undefined?'':v$.$errors[1]" />
+              :error="v$.password.$error" :errorMessage="v$.$errors==undefined?'':v$.$errors[v$.$errors.length-1]" />
           </form>
           <Button variant="primary" size="lg" class="mt-3 mw-25" type="submit" form="form-log">Submit</Button>
           <PItem variant="fs-5" color="dark" className="my-2">
@@ -29,7 +29,6 @@
   import { useVuelidate } from '@vuelidate/core';
   import { reactive, computed } from 'vue';
   import { RouterLink } from 'vue-router';
-  import { useUser } from '../../../context/UserContext';
 
   export default {
     name: 'Login',
@@ -60,8 +59,6 @@
         this.v$.$validate()
         if (!this.v$.$error) {
           alert("Completo")
-          const { setUser } = useUser();
-          setUser(this.state); // Actualiza los datos del usuario en el contexto
         } else {
           alert("Incompleto")
         }
