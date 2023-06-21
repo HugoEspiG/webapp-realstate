@@ -11,7 +11,8 @@
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "7.0.7",
           "Microsoft.AspNetCore.OpenApi": "7.0.5",
           "MongoDB.Driver": "2.19.2",
-          "Swashbuckle.AspNetCore": "6.4.0"
+          "Swashbuckle.AspNetCore": "6.4.0",
+          "mongocsharpdriver": "2.19.2"
         },
         "runtime": {
           "ConectionMongoClient.dll": {}
@@ -99,6 +100,19 @@
         "dependencies": {
           "System.Security.AccessControl": "5.0.0",
           "System.Security.Principal.Windows": "5.0.0"
+        }
+      },
+      "mongocsharpdriver/2.19.2": {
+        "dependencies": {
+          "MongoDB.Bson": "2.19.2",
+          "MongoDB.Driver": "2.19.2",
+          "MongoDB.Driver.Core": "2.19.2"
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Driver.Legacy.dll": {
+            "assemblyVersion": "2.19.2.0",
+            "fileVersion": "2.19.2.0"
+          }
         }
       },
       "MongoDB.Bson/2.19.2": {
@@ -351,6 +365,13 @@
       "sha512": "sha512-dDoKi0PnDz31yAyETfRntsLArTlVAVzUzCIvvEDsDsucrl33Dl8pIJG06ePTJTI3tGpeyHS9Cq7Foc/s4EeKcg==",
       "path": "microsoft.win32.registry/5.0.0",
       "hashPath": "microsoft.win32.registry.5.0.0.nupkg.sha512"
+    },
+    "mongocsharpdriver/2.19.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dv3RL9nKiQkjLRoqR3VxmxURkYUM9OmM4NmklqrMvT3KjW5SOq6hBYE4JgXMMT3UOjbevStbBLBMeqfBKCvkJQ==",
+      "path": "mongocsharpdriver/2.19.2",
+      "hashPath": "mongocsharpdriver.2.19.2.nupkg.sha512"
     },
     "MongoDB.Bson/2.19.2": {
       "type": "package",
