@@ -4,8 +4,6 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
       <div class="col">
         <form @submit.prevent="submitForm" id="form-log" class="mt-5 col mx-4">
-          <InputItem v-model.trim="state.name" type="text" id="name" placeholder="name" label="name"
-            :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
           <InputItem v-model.trim="state.user" type="text" id="user" placeholder="mail" label="mail"
             :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
           <InputItem v-model.trim="state.confUser" type="text" id="confUser" placeholder="Confirm mail"
@@ -42,7 +40,6 @@ export default {
   },
   setup() {
     const state = reactive({
-      name: '',
       user: '',
       confUser: '',
       password: '',
@@ -50,7 +47,6 @@ export default {
     })
     const rules = computed(() => {
       return {
-        name: { required },
         user: { required, email },
         confUser: { required, email, sameAs: sameAs(state.user, "user") },
         password: { required, minLength: minLength(6), maxLength: maxLength(20) },
@@ -75,19 +71,25 @@ export default {
       if (!this.v$.$error && !this.v$.$invalid) {
         console.log(variables.MONGOAPI + "Client/Register");
         axios.post(variables.MONGOAPI + "Client/Register", {
-          Name: this.state.name,
-          Password: this.state.password,
-          Email: this.state.user
+          Email: this.state.user,
+          Password: this.state.password
         }).then((response) => {
-          console.log(response.data);
-          let element = response.data=="Successfully added"?"SubmitOk":"SubmitFail";
-          document.getElementById(element).innerHTML = response.data;
-          document.getElementById(element).removeAttribute("hidden");
+          console.log(response.status);
+          document.getElementById("SubmitOk").innerHTML = response.data;
+          document.getElementById("SubmitOk").removeAttribute("hidden");
           setTimeout(() => {
-            document.getElementById(element).setAttribute("hidden", "hidden");
+            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+          }, 1500);
+          this.$router.push('/login');
+        }).catch(e => {
+          document.getElementById("SubmitFail").innerHTML = e.response.data;
+          document.getElementById("SubmitFail").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
           }, 1500);
         })
       } else {
+        document.getElementById("SubmitFail").innerHTML = "Data does not match";
         document.getElementById("SubmitFail").removeAttribute("hidden");
         setTimeout(() => {
           document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
