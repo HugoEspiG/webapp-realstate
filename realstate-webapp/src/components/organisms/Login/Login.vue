@@ -53,9 +53,13 @@ export default {
     submitForm() {
       this.v$.$validate()
       if (!this.v$.$error && !this.v$.$invalid) {;
-        axios.get(variables.MONGOAPI + "Client/Login?login="+this.state.user+"&password="+this.state.password, {}).then((response) => {
+        axios.post(variables.MONGOAPI + "Client/Login", {
+          Email: this.state.user,
+          Password: this.state.password
+        }).then((response) => {
           console.log(response.data);
-        })
+          //window.localStorage.setItem("token",response.data);
+        }).catch(e=> console.log(e.response));
       } else {
       }
 
