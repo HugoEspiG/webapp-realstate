@@ -2,7 +2,7 @@
   <div class="form-floating mt-3 col-10 mx-auto">
     <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" class="form-control" :placeholder="$props.placeholder" />
     <label :for="$props.id">{{ $props.label }}</label>
-    <small v-if="$props.error" class="error-message">{{ $props.errorMessage.$message }}</small>
+    <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
   </div>
 </template>
 
@@ -35,8 +35,8 @@ export default {
       default: false
     },
     errorMessage: {
-      type: Object,
-      default: {}
+      type: String,
+      default: ''
     }
   },
   data() {
