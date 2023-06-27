@@ -53,6 +53,22 @@ export default {
       submitButtonSize: 'lg',
       submitButtonClass: 'mt-3 mw-25'
     };
+  },
+  methods: {
+    submitForm() {
+      this.v$.$validate()
+      if (!this.v$.$error && !this.v$.$invalid) {
+        ;
+        axios.post(variables.MONGOAPI + "Client/Login", {
+          Email: this.state.user,
+          Password: this.state.password
+        }).then((response) => {
+          console.log(response.data);
+          //window.localStorage.setItem("token",response.data);
+        }).catch(e => console.log(e.response));
+      } else {
+      }
+    }
   }
 };
 </script>

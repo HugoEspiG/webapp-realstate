@@ -74,6 +74,42 @@ export default {
       submitButtonSize: 'lg',
       submitButtonClass: 'mt-3 mw-25'
     };
+  },
+  methods: {
+
+    submitForm() {
+      //console.log(this.v$);
+      this.v$.$validate()
+      document.getElementById('btnSubmit').disable = true;
+      if (!this.v$.$error && !this.v$.$invalid) {
+        console.log(variables.MONGOAPI + "Client/Register");
+        axios.post(variables.MONGOAPI + "Client/Register", {
+          Email: this.state.user,
+          Password: this.state.password
+        }).then((response) => {
+          console.log(response.status);
+          document.getElementById("SubmitOk").innerHTML = response.data;
+          document.getElementById("SubmitOk").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+          }, 1500);
+          this.$router.push('/login');
+        }).catch(e => {
+          document.getElementById("SubmitFail").innerHTML = e.response.data;
+          document.getElementById("SubmitFail").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+          }, 1500);
+        })
+      } else {
+        document.getElementById("SubmitFail").innerHTML = "Data does not match";
+        document.getElementById("SubmitFail").removeAttribute("hidden");
+        setTimeout(() => {
+          document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+        }, 1500);
+      }
+      document.getElementById('btnSubmit').disable = false;
+    }
   }
 };
 </script>

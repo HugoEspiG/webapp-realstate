@@ -1,10 +1,17 @@
-﻿using ConectionMongoClient.Models;
+﻿using Amazon.Runtime.Internal;
+using ConectionMongoClient.Models;
 using DnsClient;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ConectionMongoClient.Controllers
 {
@@ -13,81 +20,83 @@ namespace ConectionMongoClient.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        
         public ClientController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        [HttpGet]
-        [Route("login")]
-        public JsonResult Login(string login, string password)
+        [HttpPost("login")]
+        public ActionResult<Client> Login(ClientDto request)
         {
-            Client client = new Client();
-            client.Email = login;
-            client.Password = password;
+            Client user = new Client();
+            user.Email = request.Email;
+            user.Password = request.Password;
             MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var filter = Builders<Client>.Filter.Eq("Email", client.Email);
-            filter &= Builders<Client>.Filter.Eq("Password", client.Password);
+            var filter = Builders<Client>.Filter.Eq("Email", request.Email);
             var lastclient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList();
 
 
-            return new JsonResult(lastclient);
+            if (lastclient.Count() == 0 || request.Email != lastclient[0].Email)
+            {
+                return BadRequest("User not found.");
+            }
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, lastclient[0].Password))
+            {
+                return BadRequest("Wrong password.");
+            }
+
+            string token = CreateToken(lastclient[0]);
+
+
+            return Ok(token);
         }
 
-        [HttpGet]
-        public JsonResult Get()
+        [HttpPost("Register")]
+        public ActionResult<Client> Register(ClientDto request)
         {
+            Client user = new Client();
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            user.Email = request.Email;
+            user.Password = passwordHash;
+
             MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var dbList = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").AsQueryable();
-            return new JsonResult(dbList);
-        }
-        [HttpPost]
-        public JsonResult Post(Client client)
-        {
-            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var lastClient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").AsQueryable().Count();
-            client.ClientId = lastClient + 1;
-            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").InsertOne(client);
-            return new JsonResult("Addes Succesfully");
-        }
-        [HttpPost]
-        [Route("Register")]
-        public JsonResult Register(Client client)
-        {
-            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var filter = Builders<Client>.Filter.Eq("Email", client.Email);
+            var filter = Builders<Client>.Filter.Eq("Email", request.Email);
             var check = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList().Count();
             
             if (check > 0)
             {
-                return new JsonResult("This e-mail address is already registered.");
+                return BadRequest("This e-mail address is already registered.");
             }
 
             var lastClient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").AsQueryable().Count();
-            client.ClientId = lastClient + 1;
-            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").InsertOne(client);
-            return new JsonResult("Successfully added");
+            user.ClientId = lastClient + 1;
+            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").InsertOne(user);
+            return Ok("User created");
 
         }
 
-        [HttpPut]
-        public JsonResult Put(Client client)
+        private string CreateToken(Client client)
         {
-            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var filter = Builders<Client>.Filter.Eq("ClientId", client.ClientId);
-            var update = Builders<Client>.Update.Set("Name", client.Name);
-            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").UpdateOne(filter,update);
-            return new JsonResult("Update Succesfully");
-        }
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, client.Name),
+                new Claim(ClaimTypes.Role,client.Rol),
+            };
 
-        [HttpDelete("{id}")]
-        public JsonResult Delete(int id)
-        {
-            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
-            var filter = Builders<Client>.Filter.Eq("ClientId", id);
-            
-            dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").DeleteOne(filter);
-            return new JsonResult("Delete Succesfully");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _configuration.GetSection("Setting:Token").Value!
+                )) ;
+            var credencials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            var token = new JwtSecurityToken(
+                claims:claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials:credencials
+                );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwt;
         }
 
     }

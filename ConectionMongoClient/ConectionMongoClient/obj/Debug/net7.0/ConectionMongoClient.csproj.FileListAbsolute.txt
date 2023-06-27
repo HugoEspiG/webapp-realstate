@@ -99,3 +99,9 @@ D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\Con
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ConectionMongoClient.genruntimeconfig.cache
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ref\ConectionMongoClient.dll
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\MongoDB.Driver.Legacy.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\BCrypt.Net-Next.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
