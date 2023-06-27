@@ -4,7 +4,7 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
       <div class="col">
         <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"/>
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm"/>
       </div>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -76,16 +76,16 @@ export default {
     };
   },
   methods: {
-
-    submitForm() {
-      //console.log(this.v$);
-      this.v$.$validate()
+    handleSubmitForm(v$,state) {
+      console.log(v$);
+      console.log(state);
+      v$.$validate()
       document.getElementById('btnSubmit').disable = true;
-      if (!this.v$.$error && !this.v$.$invalid) {
+      if (!v$.$error && !v$.$invalid) {
         console.log(variables.MONGOAPI + "Client/Register");
         axios.post(variables.MONGOAPI + "Client/Register", {
-          Email: this.state.user,
-          Password: this.state.password
+          Email: state.user,
+          Password: state.password
         }).then((response) => {
           console.log(response.status);
           document.getElementById("SubmitOk").innerHTML = response.data;

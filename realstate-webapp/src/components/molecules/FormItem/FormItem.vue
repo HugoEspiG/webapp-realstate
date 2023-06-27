@@ -1,13 +1,13 @@
 <template>
     <div>
-        <form @submit.prevent="submitForm" :id="formId" class="mt-5 col mx-4">
+        <form @submit.prevent="submitfunction" :id="formId" class="mt-5 col mx-4">
             <div v-for="(field, index) in fields" :key="index">
                 <InputItem v-model.trim="state[field.name]" :type="field.type" :id="field.id"
                     :placeholder="field.placeholder" :label="field.label" :error="v$[field.name].$error"
                     :errorMessage="getErrorMessage(field.name)" />
             </div>
         </form>
-        <Button :variant="submitButtonVariant" :size="submitButtonSize" :class="submitButtonClass" :type="submitButtonType"
+        <Button @click="submitfunction" :variant="submitButtonVariant" :size="submitButtonSize" :class="submitButtonClass" :type="submitButtonType"
             :form="formId">
             {{ submitButtonText }}
         </Button>
@@ -56,6 +56,10 @@ export default {
         submitButtonText: {
             type: String,
             default: 'Submit'
+        },
+        handleSubmitForm:{
+            type: Function,
+            required: true  
         }
     },
     setup(props) {
@@ -93,44 +97,8 @@ methods: {
         }
         return '';
     },
-    submitForm() {
-        this.v$.$validate()
-        console.log(this.v$);
-        if (!this.v$.$error && !this.v$.$invalid) {
-            ;
-            axios.get(variables.MONGOAPI + "Client/Login?login=" + this.state.user + "&password=" + this.state.password, {}).then((response) => {
-                console.log(response.data);
-            })
-        } else {
-        }
-
-        //El otro caso del register:
-        //console.log(this.v$);
-        // this.v$.$validate()
-        // document.getElementById('btnSubmit').disable = true;
-        // if (!this.v$.$error && !this.v$.$invalid) {
-        //     console.log(variables.MONGOAPI + "Client/Register");
-        //     axios.post(variables.MONGOAPI + "Client/Register", {
-        //         Name: this.state.name,
-        //         Password: this.state.password,
-        //         Email: this.state.user
-        //     }).then((response) => {
-        //         console.log(response.data);
-        //         let element = response.data == "Successfully added" ? "SubmitOk" : "SubmitFail";
-        //         document.getElementById(element).innerHTML = response.data;
-        //         document.getElementById(element).removeAttribute("hidden");
-        //         setTimeout(() => {
-        //             document.getElementById(element).setAttribute("hidden", "hidden");
-        //         }, 1500);
-        //     })
-        // } else {
-        //     document.getElementById("SubmitFail").removeAttribute("hidden");
-        //     setTimeout(() => {
-        //         document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-        //     }, 1500);
-        // }
-        // document.getElementById('btnSubmit').disable = false;
-
+    submitfunction(){
+        this.handleSubmitForm(this.v$,this.state)
     }
 }
 };

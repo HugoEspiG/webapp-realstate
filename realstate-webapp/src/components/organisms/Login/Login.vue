@@ -4,7 +4,7 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
         <FormItem :fields="formFields" formId="form-log" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" />
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm" />
         <PItem variant="fs-5" color="dark" class="my-2">
           ¿Aún no estás registrado? <RouterLink to="/register"> Registrate</RouterLink>
         </PItem>
@@ -21,6 +21,7 @@ import FormItem from '../../molecules/FormItem/FormItem.vue';
 import Button from '../../atoms/Button/Button.vue';
 import PItem from '../../atoms/PItem/PItem.vue';
 import { required, email, minLength, maxLength } from '@vuelidate/validators';
+import axios from 'axios';
 
 export default {
   name: 'Login',
@@ -55,13 +56,15 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      this.v$.$validate()
-      if (!this.v$.$error && !this.v$.$invalid) {
+    handleSubmitForm(v$,state) {
+      v$.$validate()
+      console.log(v$);
+      console.log(state);
+      if (!v$.$error && !v$.$invalid) {
         ;
         axios.post(variables.MONGOAPI + "Client/Login", {
-          Email: this.state.user,
-          Password: this.state.password
+          Email: state.user,
+          Password: state.password
         }).then((response) => {
           console.log(response.data);
           //window.localStorage.setItem("token",response.data);
