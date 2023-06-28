@@ -39,7 +39,8 @@ export default {
           id: 'user',
           placeholder: 'Username',
           label: 'Username',
-          validationRules: { required, email }
+          validationRules: { required, email },
+          typeInput: 'input'
         },
         {
           name: 'password',
@@ -47,7 +48,8 @@ export default {
           id: 'password',
           placeholder: 'Password',
           label: 'Password',
-          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) }
+          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+          typeInput: 'input'
         }
       ],
       submitButtonVariant: 'primary',
@@ -58,8 +60,6 @@ export default {
   methods: {
     handleSubmitForm(v$,state) {
       v$.$validate()
-      console.log(v$);
-      console.log(state);
       if (!v$.$error && !v$.$invalid) {
         ;
         axios.post(variables.MONGOAPI + "Client/Login", {

@@ -35,7 +35,8 @@ export default {
           id: 'name',
           placeholder: 'Name',
           label: 'Name',
-          validationRules: { required }
+          validationRules: { required },
+          typeInput: 'input'
         },
         {
           name: 'user',
@@ -43,7 +44,8 @@ export default {
           id: 'user',
           placeholder: 'Username',
           label: 'Username',
-          validationRules: { required, email }
+          validationRules: { required, email },
+          typeInput: 'input'
         },
         {
           name: 'confUser',
@@ -51,7 +53,8 @@ export default {
           id: 'confUser',
           placeholder: 'Confirm email',
           label: 'Confirm email',
-          validationRules: { required, sameAs:"user"}
+          validationRules: { required, sameAs:"user"},
+          typeInput: 'input'
         },
         {
           name: 'password',
@@ -59,7 +62,8 @@ export default {
           id: 'password',
           placeholder: 'Password',
           label: 'Password',
-          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) }
+          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+          typeInput: 'input'
         },
         {
           name: 'confPassword',
@@ -67,7 +71,8 @@ export default {
           id: 'confPassword',
           placeholder: 'Confirm Password',
           label: 'Confirm Password',
-          validationRules: { required, sameAs:"password"}
+          validationRules: { required, sameAs:"password"},
+          typeInput: 'input'
         }
       ],
       submitButtonVariant: 'primary',
@@ -77,38 +82,36 @@ export default {
   },
   methods: {
     handleSubmitForm(v$,state) {
-      console.log(v$);
-      console.log(state);
       v$.$validate()
-      document.getElementById('btnSubmit').disable = true;
-      if (!v$.$error && !v$.$invalid) {
-        console.log(variables.MONGOAPI + "Client/Register");
-        axios.post(variables.MONGOAPI + "Client/Register", {
-          Email: state.user,
-          Password: state.password
-        }).then((response) => {
-          console.log(response.status);
-          document.getElementById("SubmitOk").innerHTML = response.data;
-          document.getElementById("SubmitOk").removeAttribute("hidden");
-          setTimeout(() => {
-            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
-          }, 1500);
-          this.$router.push('/login');
-        }).catch(e => {
-          document.getElementById("SubmitFail").innerHTML = e.response.data;
-          document.getElementById("SubmitFail").removeAttribute("hidden");
-          setTimeout(() => {
-            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-          }, 1500);
-        })
-      } else {
-        document.getElementById("SubmitFail").innerHTML = "Data does not match";
-        document.getElementById("SubmitFail").removeAttribute("hidden");
-        setTimeout(() => {
-          document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-        }, 1500);
-      }
-      document.getElementById('btnSubmit').disable = false;
+      // document.getElementById('btnSubmit').disable = true;
+      // if (!v$.$error && !v$.$invalid) {
+      //   console.log(variables.MONGOAPI + "Client/Register");
+      //   axios.post(variables.MONGOAPI + "Client/Register", {
+      //     Email: state.user,
+      //     Password: state.password
+      //   }).then((response) => {
+      //     console.log(response.status);
+      //     document.getElementById("SubmitOk").innerHTML = response.data;
+      //     document.getElementById("SubmitOk").removeAttribute("hidden");
+      //     setTimeout(() => {
+      //       document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+      //     }, 1500);
+      //     this.$router.push('/login');
+      //   }).catch(e => {
+      //     document.getElementById("SubmitFail").innerHTML = e.response.data;
+      //     document.getElementById("SubmitFail").removeAttribute("hidden");
+      //     setTimeout(() => {
+      //       document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+      //     }, 1500);
+      //   })
+      // } else {
+      //   document.getElementById("SubmitFail").innerHTML = "Data does not match";
+      //   document.getElementById("SubmitFail").removeAttribute("hidden");
+      //   setTimeout(() => {
+      //     document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+      //   }, 1500);
+      // }
+      // document.getElementById('btnSubmit').disable = false;
     }
   }
 };
