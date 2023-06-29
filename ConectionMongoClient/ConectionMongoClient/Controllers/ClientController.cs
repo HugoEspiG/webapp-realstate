@@ -76,6 +76,14 @@ namespace ConectionMongoClient.Controllers
 
         }
 
+        [HttpPut("Update")]
+
+        public  ActionResult<Client> Update(Client request)
+        { 
+
+            return Ok(request);
+        }
+
         private string CreateToken(Client client)
         {
             List<Claim> claims = new List<Claim>
