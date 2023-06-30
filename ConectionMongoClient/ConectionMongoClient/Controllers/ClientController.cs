@@ -78,17 +78,42 @@ namespace ConectionMongoClient.Controllers
 
         [HttpPut("Update")]
 
-        public  ActionResult<Client> Update(Client request)
-        { 
+        public  async Task<ActionResult<Client>> Update(Client request)
+        {
+            var protectedField = new List<string> {"_id","Rol","ClientId","Password","Email"};
+            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
+            var filter = Builders<Client>.Filter.Eq("Email", request.Email);
+            var updatedict = new List<UpdateDefinition<Client>>();
+            foreach (var prop in request.GetType().GetProperties())
+            {
+                if (!protectedField.Any(prop.Name.Contains))
+                {
+                    updatedict.Add(Builders<Client>.Update.Set(prop.Name, prop.GetValue(request)));
+                }
 
-            return Ok(request);
+            }
+
+            var update = Builders<Client>.Update.Combine(updatedict);
+            await dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").UpdateOneAsync(filter, update);
+            return Ok("");
+        }
+
+        [HttpGet("Get")]
+        public ActionResult<Client> Get(string request)
+        {
+
+            MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
+            var filter = Builders<Client>.Filter.Eq("_id", ObjectId.Parse(request));
+            var lastclient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList();
+
+            return Ok(lastclient);
         }
 
         private string CreateToken(Client client)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, client.Name),
+                new Claim(ClaimTypes.Name, client.id.ToString()),
                 new Claim(ClaimTypes.Role,client.Rol),
             };
 
