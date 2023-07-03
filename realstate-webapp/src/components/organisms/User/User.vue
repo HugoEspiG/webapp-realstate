@@ -1,19 +1,29 @@
 <template>
-    <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
-        <div class="card-body">
-            <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
-            <div class="col">
-                <form @submit.prevent="submitForm" id="form-log" class="mt-5 col mx-4">
-                    <InputItem v-model.trim="state.user" type="text" id="user" placeholder="Username" label="Username"
-                        :error="v$.user.$error" :errorMessage="getErrorMessage('user')" />
-                    <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password"
-                        label="Password" :error="v$.password.$error" :errorMessage="getErrorMessage('password')" />
-                </form>
-                <Button variant="primary" size="lg" class="mt-3 mw-25" type="submit" form="form-log">Save</Button>
+    <div class="mt-2">
+        <p class="fs-1">Bienvenido {{ $route.params.id }}</p>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Foto</p>
+            </div>
+            <div class="col-md-8">
+                <div>
+                    <p class="fs-3 mx-auto">Propiedades mas recientes encontradas para ti</p>
+                </div>
+                <div class="prueba">
+                    <p class="fs-3">Tus datos personales</p>
+                    <div class="text-end">
+                        Aca ira toda la info
+                    </div>
+                    <Button @click="edit" variant="primary" size="lg" class="mt-2 text-end">
+                        Editar
+                    </Button>
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+
 <script>
 
 import InputItem from '../../atoms/InputItem/InputItem.vue'
@@ -38,7 +48,9 @@ export default {
         }
     },
     methods: {
+        edit(){
 
+        }
     }
 };
 </script>
