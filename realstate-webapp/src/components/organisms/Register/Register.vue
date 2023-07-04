@@ -69,8 +69,7 @@ export default {
       this.v$.$validate()
       document.getElementById('btnSubmit').disable = true;
       if (!this.v$.$error && !this.v$.$invalid) {
-        console.log(variables.MONGOAPI + "Client/Register");
-        axios.post(variables.MONGOAPI + "Client/Register", {
+        axios.post("Client/Register", {
           Email: this.state.user,
           Password: this.state.password
         }).then((response) => {

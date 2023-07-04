@@ -3,7 +3,7 @@
     <div class="card-body">
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
-        <form @submit.prevent="submitForm" id="form-log" class="mt-5 col mx-4">
+        <form @submit.prevent="handleSubmit" id="form-log" class="mt-5 col mx-4">
           <InputItem v-model.trim="state.user" type="text" id="user" placeholder="Username" label="Username"
             :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
           <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password" label="Password"
@@ -50,24 +50,23 @@ export default {
     }
   },
   methods: {
-    submitForm() {
+    async handleSubmit() {
       this.v$.$validate()
       if (!this.v$.$error && !this.v$.$invalid) {;
-        axios.post(variables.MONGOAPI + "Client/Login", {
+        axios.post("Client/Login", {
           Email: this.state.user,
           Password: this.state.password
         }).then((response) => {
-          console.log(response.data);
-          //window.localStorage.setItem("token",response.data);
+          window.sessionStorage.setItem('rs-device',JSON.stringify({"data":response.data.value, "pid":response.data.user}));
         }).catch(e=> console.log(e.response));
       } else {
       }
-
+    }
       
 
-    }
+    
   }
-};
+}
 </script>
 
 <style>

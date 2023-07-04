@@ -14,7 +14,7 @@
                                 <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">About</RouterLink>
                             </li>
                         </ul>
-                        <span class="nav-item dropdown">
+                        <span class="nav-item dropdown" v-if="!user">
                             <span class="nav-link dropdown-toggle bi bi-person-circle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false"> </span>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><RouterLink to="/login" class="dropdown-item">Login</RouterLink></li>
@@ -22,6 +22,14 @@
                                 <li><hr class="dropdown-divider" /></li>
                             </ul>
                         </span>
+                        <span class="nav-item dropdown" v-if="user">
+                            <span class="nav-link dropdown-toggle bi bi-person-circle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false"> </span>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a href="javascript:void(0)" @click="handleClick" class="dropdown-item">Logout</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                            </ul>
+                        </span>
+                        
                     </div>
                 </div>
             </nav>
@@ -30,7 +38,14 @@
   
 <script>
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    props:['user'],
+    methods:{
+        handleClick(){
+            sessionStorage.removeItem('rs-device');
+            this.$route.push('/');
+        }
+    }
 }
 </script>
   
