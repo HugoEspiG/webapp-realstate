@@ -3,18 +3,8 @@
     <div class="card-body">
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
       <div class="col">
-        <form @submit.prevent="submitForm" id="form-log" class="mt-5 col mx-4">
-          <InputItem v-model.trim="state.user" type="text" id="user" placeholder="mail" label="mail"
-            :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
-          <InputItem v-model.trim="state.confUser" type="text" id="confUser" placeholder="Confirm mail"
-            label="Confirm mail" :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
-          <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password" label="Password"
-            :error="v$.password.$error" errorMessage="El campo no puede estar vacío" />
-          <InputItem v-model.trim="state.Confpassword" type="password" id="Confpassword" placeholder="Confir Password"
-            label="Confirm Password" :error="v$.password.$error" errorMessage="El campo no puede estar vacío" />
-          <Button id="btnSubmit" variant="primary" size="lg" class="mt-3 mw-25" type="submit"
-            form="form-log">Submit</Button>
-        </form>
+        <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm"/>
       </div>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -26,41 +16,72 @@
 import InputItem from '../../atoms/InputItem/InputItem.vue'
 import Button from '../../atoms/Button/Button.vue'
 import PItem from '../../atoms/PItem/PItem.vue'
-import axios from 'axios';
-import { required, email, minLength, maxLength, sameAs } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import { reactive, computed } from 'vue';
+import FormItem from '../../molecules/FormItem/FormItem.vue';
+import { required, email, minLength, maxLength } from '@vuelidate/validators';
 
 export default {
   name: 'Register',
   components: {
     Button,
     PItem,
-    InputItem
-  },
-  setup() {
-    const state = reactive({
-      user: '',
-      confUser: '',
-      password: '',
-      Confpassword: ''
-    })
-    const rules = computed(() => {
-      return {
-        user: { required, email },
-        confUser: { required, email, sameAs: sameAs(state.user, "user") },
-        password: { required, minLength: minLength(6), maxLength: maxLength(20) },
-        Confpassword: { required, minLength: minLength(6), maxLength: maxLength(20), sameAs: sameAs(state.password, "password") }
-      }
-    })
-    const v$ = useVuelidate(rules, state)
-
+    InputItem,
+    FormItem
+  }, data() {
     return {
-      state,
-      v$
-    }
+      formFields: [
+        {
+          name: 'name',
+          type: 'text',
+          id: 'name',
+          placeholder: 'Name',
+          label: 'Name',
+          validationRules: { required },
+          typeInput: 'input'
+        },
+        {
+          name: 'user',
+          type: 'text',
+          id: 'user',
+          placeholder: 'Username',
+          label: 'Username',
+          validationRules: { required, email },
+          typeInput: 'input'
+        },
+        {
+          name: 'confUser',
+          type: 'text',
+          id: 'confUser',
+          placeholder: 'Confirm email',
+          label: 'Confirm email',
+          validationRules: { required, sameAs:"user"},
+          typeInput: 'input'
+        },
+        {
+          name: 'password',
+          type: 'password',
+          id: 'password',
+          placeholder: 'Password',
+          label: 'Password',
+          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+          typeInput: 'input'
+        },
+        {
+          name: 'confPassword',
+          type: 'password',
+          id: 'confPassword',
+          placeholder: 'Confirm Password',
+          label: 'Confirm Password',
+          validationRules: { required, sameAs:"password"},
+          typeInput: 'input'
+        }
+      ],
+      submitButtonVariant: 'primary',
+      submitButtonSize: 'lg',
+      submitButtonClass: 'mt-3 mw-25'
+    };
   },
   methods: {
+<<<<<<< HEAD
 
 
 
@@ -95,6 +116,39 @@ export default {
         }, 1500);
       }
       document.getElementById('btnSubmit').disable = false;
+=======
+    handleSubmitForm(v$,state) {
+      v$.$validate()
+      // document.getElementById('btnSubmit').disable = true;
+      // if (!v$.$error && !v$.$invalid) {
+      //   console.log(variables.MONGOAPI + "Client/Register");
+      //   axios.post(variables.MONGOAPI + "Client/Register", {
+      //     Email: state.user,
+      //     Password: state.password
+      //   }).then((response) => {
+      //     console.log(response.status);
+      //     document.getElementById("SubmitOk").innerHTML = response.data;
+      //     document.getElementById("SubmitOk").removeAttribute("hidden");
+      //     setTimeout(() => {
+      //       document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+      //     }, 1500);
+      //     this.$router.push('/login');
+      //   }).catch(e => {
+      //     document.getElementById("SubmitFail").innerHTML = e.response.data;
+      //     document.getElementById("SubmitFail").removeAttribute("hidden");
+      //     setTimeout(() => {
+      //       document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+      //     }, 1500);
+      //   })
+      // } else {
+      //   document.getElementById("SubmitFail").innerHTML = "Data does not match";
+      //   document.getElementById("SubmitFail").removeAttribute("hidden");
+      //   setTimeout(() => {
+      //     document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+      //   }, 1500);
+      // }
+      // document.getElementById('btnSubmit').disable = false;
+>>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
     }
   }
 };

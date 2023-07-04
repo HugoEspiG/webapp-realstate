@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <header>
     <!-- <nav>
@@ -5,6 +6,24 @@
           <RouterLink to="/about">About</RouterLink>
         </nav> -->
     <Navbar :user="user" />
+=======
+<script>
+import { RouterView } from 'vue-router'
+import Navbar from './components/organisms/Navbar/Navbar.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Navbar
+  }
+};
+
+</script>
+
+<template>
+  <header>
+    <Navbar />
+>>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
   </header>
 
   <RouterView :user="user" />
