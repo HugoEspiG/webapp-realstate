@@ -81,6 +81,42 @@ export default {
     };
   },
   methods: {
+<<<<<<< HEAD
+
+
+
+    submitForm() {
+      //console.log(this.v$);
+      this.v$.$validate()
+      document.getElementById('btnSubmit').disable = true;
+      if (!this.v$.$error && !this.v$.$invalid) {
+        axios.post("Client/Register", {
+          Email: this.state.user,
+          Password: this.state.password
+        }).then((response) => {
+          console.log(response.status);
+          document.getElementById("SubmitOk").innerHTML = response.data;
+          document.getElementById("SubmitOk").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+          }, 1500);
+          this.$router.push('/login');
+        }).catch(e => {
+          document.getElementById("SubmitFail").innerHTML = e.response.data;
+          document.getElementById("SubmitFail").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+          }, 1500);
+        })
+      } else {
+        document.getElementById("SubmitFail").innerHTML = "Data does not match";
+        document.getElementById("SubmitFail").removeAttribute("hidden");
+        setTimeout(() => {
+          document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+        }, 1500);
+      }
+      document.getElementById('btnSubmit').disable = false;
+=======
     handleSubmitForm(v$,state) {
       v$.$validate()
       // document.getElementById('btnSubmit').disable = true;
@@ -112,6 +148,7 @@ export default {
       //   }, 1500);
       // }
       // document.getElementById('btnSubmit').disable = false;
+>>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
     }
   }
 };

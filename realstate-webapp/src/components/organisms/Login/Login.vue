@@ -3,6 +3,15 @@
     <div class="card-body">
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
+<<<<<<< HEAD
+        <form @submit.prevent="handleSubmit" id="form-log" class="mt-5 col mx-4">
+          <InputItem v-model.trim="state.user" type="text" id="user" placeholder="Username" label="Username"
+            :error="v$.user.$error" errorMessage="El campo no puede estar vacío" />
+          <InputItem v-model.trim="state.password" type="password" id="password" placeholder="Password" label="Password"
+            :error="v$.password.$error" errorMessage="El campo no puede estar vacío" />
+          <Button variant="primary" size="lg" class="mt-3 mw-25" type="submit" form="form-log">Submit</Button>
+        </form>
+=======
         <FormItem :fields="formFields" formId="form-log" :submitButtonVariant="submitButtonVariant"
           :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm" />
         <PItem variant="fs-5" color="dark" class="my-2">
@@ -11,6 +20,7 @@
         <div class="divider"> OR</div>
         <Button variant="outline-primary" size="lg" class="bi bi-google mt-3 mw-25" type="submit" form="form-log"> Log in
           con Google</Button>
+>>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
       </div>
     </div>
   </div>
@@ -58,6 +68,23 @@ export default {
     };
   },
   methods: {
+<<<<<<< HEAD
+    async handleSubmit() {
+      this.v$.$validate()
+      if (!this.v$.$error && !this.v$.$invalid) {;
+        axios.post("Client/Login", {
+          Email: this.state.user,
+          Password: this.state.password
+        }).then((response) => {
+          window.sessionStorage.setItem('rs-device',JSON.stringify({"data":response.data.value, "pid":response.data.user}));
+        }).catch(e=> console.log(e.response));
+      } else {
+      }
+    }
+      
+
+    
+=======
     handleSubmitForm(v$,state) {
       v$.$validate()
       if (!v$.$error && !v$.$invalid) {
@@ -72,8 +99,9 @@ export default {
       } else {
       }
     }
+>>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
   }
-};
+}
 </script>
 
 
