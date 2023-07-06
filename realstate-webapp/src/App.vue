@@ -1,32 +1,13 @@
-<<<<<<< HEAD
 <template>
   <header>
     <!-- <nav>
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">About</RouterLink>
         </nav> -->
-    <Navbar :user="user" />
-=======
-<script>
-import { RouterView } from 'vue-router'
-import Navbar from './components/organisms/Navbar/Navbar.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Navbar
-  }
-};
-
-</script>
-
-<template>
-  <header>
     <Navbar />
->>>>>>> db7020d4705887115d6f29a37b388392bd4375b7
   </header>
 
-  <RouterView :user="user" />
+  <RouterView  />
 </template>
 
 <script >
@@ -51,11 +32,10 @@ export default{
     const response = await axios.get(`Client/User`,{
       params:{
         request: pid,
-        limit: "Simple"
+        limit: "All"
       }
     });
-
-    this.user = response.data;
+    this.$store.dispatch('user', response.data);
     }
   }
 }

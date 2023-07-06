@@ -25,6 +25,7 @@
                         <span class="nav-item dropdown" v-if="user">
                             <span class="nav-link dropdown-toggle bi bi-person-circle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false"> </span>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                <li><RouterLink to="/user" class="dropdown-item">User</RouterLink></li>
                                 <li><a href="javascript:void(0)" @click="handleClick" class="dropdown-item">Logout</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                             </ul>
@@ -37,14 +38,18 @@
   
   
 <script>
+import {mapGetters} from 'vuex'
 export default {
     name: 'NavBar',
-    props:['user'],
     methods:{
         handleClick(){
             sessionStorage.removeItem('rs-device');
-            this.$route.push('/');
+            this.$store.dispatch('user',null);
+            this.$router.push('/')
         }
+    },
+    computed:{
+        ...mapGetters(['user'])
     }
 }
 </script>
