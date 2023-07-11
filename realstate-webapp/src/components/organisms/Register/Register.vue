@@ -4,7 +4,7 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
       <div class="col">
         <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm"/>
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="submitfunction"/>
       </div>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -13,6 +13,7 @@
 </template>
   
 <script>
+import axios from 'axios'
 import InputItem from '../../atoms/InputItem/InputItem.vue'
 import Button from '../../atoms/Button/Button.vue'
 import PItem from '../../atoms/PItem/PItem.vue'
@@ -53,7 +54,7 @@ export default {
           id: 'confUser',
           placeholder: 'Confirm email',
           label: 'Confirm email',
-          validationRules: { required, sameAs:"user"},
+          validationRules: { required},
           typeInput: 'input'
         },
         {
@@ -71,7 +72,7 @@ export default {
           id: 'confPassword',
           placeholder: 'Confirm Password',
           label: 'Confirm Password',
-          validationRules: { required, sameAs:"password"},
+          validationRules: { required},
           typeInput: 'input'
         }
       ],
@@ -84,14 +85,15 @@ export default {
 
 
 
-    submitForm() {
+    submitfunction(v,state) {
       //console.log(this.v$);
-      this.v$.$validate()
-      document.getElementById('btnSubmit').disable = true;
-      if (!this.v$.$error && !this.v$.$invalid) {
+      v.$validate()
+      if (!v.$error && !v.$invalid) {
         axios.post("Client/Register", {
-          Email: this.state.user,
-          Password: this.state.password
+          Name:state.name,
+          Email: state.user,
+          Password: state.password,
+          Rol:"Client"
         }).then((response) => {
           console.log(response.status);
           document.getElementById("SubmitOk").innerHTML = response.data;
@@ -114,7 +116,6 @@ export default {
           document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
         }, 1500);
       }
-      document.getElementById('btnSubmit').disable = false;
     }
   }
 };

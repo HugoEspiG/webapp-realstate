@@ -4,16 +4,10 @@ import User from '../components/organisms/User/User.vue';
 
 <template>
         <div class="container">
-            <p>{{ user }}</p>
+          <Userview></Userview>
         </div>
 </template>
 
-<script>
-import {mapGetters} from 'vuex'
-export default{
-    name:"User",
-    computed:{
-    ...mapGetters(['user'])
-  }
-}
+<script setup>
+import Userview from '../components/organisms/User/User.vue';
 </script>

@@ -62,6 +62,8 @@ namespace ConectionMongoClient.Controllers
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
             user.Email = request.Email;
             user.Password = passwordHash;
+            user.Name = request.Name;
+            user.Rol = request.Rol;
 
             MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
             var filter = Builders<Client>.Filter.Eq("Email", request.Email);
@@ -107,15 +109,17 @@ namespace ConectionMongoClient.Controllers
 
             MongoClient dbCLient = new MongoClient(_configuration.GetConnectionString("UserClient"));
             var filter = Builders<Client>.Filter.Eq("_id", ObjectId.Parse(request));
-            var lastclient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList();
-            if(limit == "permission")
+            var lastclient = dbCLient.GetDatabase("Usuarios").GetCollection<Client>("Clients").Find(filter).ToList()[0];
+            lastclient.Password = string.Empty;
+            if (limit == "permission")
             {
-                return Ok(lastclient[0].Rol);
+                return Ok(lastclient.Rol);
             }
             if (limit == "Simple")
             {
-                return new OkObjectResult(new { name = lastclient[0].Name, email = lastclient[0].Email , rol = lastclient[0].Rol});
+                return new OkObjectResult(new { name = lastclient.Name, email = lastclient.Email , rol = lastclient.Rol});
             }
+
 
             return Ok(lastclient);
         }
