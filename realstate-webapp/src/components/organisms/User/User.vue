@@ -323,8 +323,7 @@ export default {
         InputItem,
         ErrorData
     },
-
-    computed:{
+   computed:{
         ...mapGetters(['user'])
     },
     methods:{
