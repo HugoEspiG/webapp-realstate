@@ -4,7 +4,7 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
       <div class="col">
         <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm"/>
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="submitfunction"/>
       </div>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -13,6 +13,7 @@
 </template>
   
 <script>
+import axios from 'axios'
 import InputItem from '../../atoms/InputItem/InputItem.vue'
 import Button from '../../atoms/Button/Button.vue'
 import PItem from '../../atoms/PItem/PItem.vue'
@@ -53,7 +54,7 @@ export default {
           id: 'confUser',
           placeholder: 'Confirm email',
           label: 'Confirm email',
-          validationRules: { required, sameAs:"user"},
+          validationRules: { required},
           typeInput: 'input'
         },
         {
@@ -71,7 +72,7 @@ export default {
           id: 'confPassword',
           placeholder: 'Confirm Password',
           label: 'Confirm Password',
-          validationRules: { required, sameAs:"password"},
+          validationRules: { required},
           typeInput: 'input'
         }
       ],
@@ -81,37 +82,40 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm(v$,state) {
-      v$.$validate()
-      // document.getElementById('btnSubmit').disable = true;
-      // if (!v$.$error && !v$.$invalid) {
-      //   console.log(variables.MONGOAPI + "Client/Register");
-      //   axios.post(variables.MONGOAPI + "Client/Register", {
-      //     Email: state.user,
-      //     Password: state.password
-      //   }).then((response) => {
-      //     console.log(response.status);
-      //     document.getElementById("SubmitOk").innerHTML = response.data;
-      //     document.getElementById("SubmitOk").removeAttribute("hidden");
-      //     setTimeout(() => {
-      //       document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
-      //     }, 1500);
-      //     this.$router.push('/login');
-      //   }).catch(e => {
-      //     document.getElementById("SubmitFail").innerHTML = e.response.data;
-      //     document.getElementById("SubmitFail").removeAttribute("hidden");
-      //     setTimeout(() => {
-      //       document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-      //     }, 1500);
-      //   })
-      // } else {
-      //   document.getElementById("SubmitFail").innerHTML = "Data does not match";
-      //   document.getElementById("SubmitFail").removeAttribute("hidden");
-      //   setTimeout(() => {
-      //     document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-      //   }, 1500);
-      // }
-      // document.getElementById('btnSubmit').disable = false;
+
+
+
+    submitfunction(v,state) {
+      //console.log(this.v$);
+      v.$validate()
+      if (!v.$error && !v.$invalid) {
+        axios.post("Client/Register", {
+          Name:state.name,
+          Email: state.user,
+          Password: state.password,
+          Rol:"Client"
+        }).then((response) => {
+          console.log(response.status);
+          document.getElementById("SubmitOk").innerHTML = response.data;
+          document.getElementById("SubmitOk").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+          }, 1500);
+          this.$router.push('/login');
+        }).catch(e => {
+          document.getElementById("SubmitFail").innerHTML = e.response.data;
+          document.getElementById("SubmitFail").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+          }, 1500);
+        })
+      } else {
+        document.getElementById("SubmitFail").innerHTML = "Data does not match";
+        document.getElementById("SubmitFail").removeAttribute("hidden");
+        setTimeout(() => {
+          document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+        }, 1500);
+      }
     }
   }
 };

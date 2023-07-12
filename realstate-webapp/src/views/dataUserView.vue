@@ -1,5 +1,5 @@
 <script setup>
-import dataUser from '../components/organisms/User/dataUser/dataUser.vue';
+import dataUser from '../components/organisms/User/dataUser/dataUser2.vue';
 </script>
 
 <template>

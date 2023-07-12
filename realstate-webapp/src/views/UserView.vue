@@ -1,9 +1,13 @@
-<script setup>
-import Register from '../components/organisms/Register/Register.vue';
-</script>
+<!--<script setup>
+import User from '../components/organisms/User/User.vue';
+</script>-->
 
 <template>
         <div class="container">
-            <p>{{ $route.params.id }}</p>
+          <Userview></Userview>
         </div>
 </template>
+
+<script setup>
+import Userview from '../components/organisms/User/User.vue';
+</script>
