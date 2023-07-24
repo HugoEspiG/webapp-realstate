@@ -4,7 +4,7 @@
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
         <FormItem :fields="formFields" formId="form-log" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm" />
+          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmit" />
         <PItem variant="fs-5" color="dark" class="my-2">
           ¿Aún no estás registrado? <RouterLink to="/register"> Registrate</RouterLink>
         </PItem>
@@ -58,22 +58,25 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm(v$,state) {
-      v$.$validate()
-      if (!v$.$error && !v$.$invalid) {
-        ;
-        axios.post(variables.MONGOAPI + "Client/Login", {
+    async handleSubmit(v,state) {
+      v.$validate()
+      if (!v.$error && !v.$invalid) {;
+        axios.post("Client/Login", {
           Email: state.user,
           Password: state.password
         }).then((response) => {
-          console.log(response.data);
-          //window.localStorage.setItem("token",response.data);
-        }).catch(e => console.log(e.response));
+          window.sessionStorage.setItem('rs-device',JSON.stringify({"data":response.data.value, "pid":response.data.user}));
+          this.$store.dispatch('user',response.data.user);
+          this.$router.push("/");
+        }).catch(e=> console.log(e.response));
       } else {
       }
     }
+      
+
+    
   }
-};
+}
 </script>
 
 
