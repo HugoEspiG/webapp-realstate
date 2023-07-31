@@ -40,7 +40,8 @@ export default {
           placeholder: 'Username',
           label: 'Username',
           validationRules: { required, email },
-          typeInput: 'input'
+          typeInput: 'input',
+          class: 'col-12 mb-2'
         },
         {
           name: 'password',
@@ -49,7 +50,8 @@ export default {
           placeholder: 'Password',
           label: 'Password',
           validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
-          typeInput: 'input'
+          typeInput: 'input',
+          class: 'col-12'
         }
       ],
       submitButtonVariant: 'primary',

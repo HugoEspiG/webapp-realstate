@@ -3,11 +3,9 @@
         <div>
             <div class="card-body">
                 <PItem variant="fs-3" color="dark" class="my-2 card-title">Personal Info</PItem>
-                <div class="col">
-                    <FormItem :fields="formFields.Personal" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-                        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-                        :handleSubmitForm="handleSubmitForm" />
-                </div>
+                <FormItem :fields="formFields.Personal" formId="form-pInfo" :submitButtonVariant="submitButtonVariant"
+                    :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
+                    :handleSubmitForm="handleSubmitForm" />
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
             <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
@@ -70,13 +68,24 @@ export default {
             formFields: {
                 Personal: [
                     {
+                        name: 'email',
+                        type: 'text',
+                        id: 'email',
+                        placeholder: 'email',
+                        label: 'email',
+                        validationRules: { required, email },
+                        typeInput: 'input',
+                        class: 'col-md-6'
+                    },
+                    {
                         name: 'phone',
                         type: 'text',
                         id: 'phone',
                         placeholder: 'Phone',
                         label: 'Phone',
                         validationRules: { required },
-                        typeInput: 'input'
+                        typeInput: 'input',
+                        class: 'col-md-4'
                     },
                     {
                         name: 'address',
@@ -85,51 +94,46 @@ export default {
                         placeholder: 'Address',
                         label: 'Addres',
                         validationRules: { required },
-                        typeInput: 'input'
+                        typeInput: 'input',
+                        class: 'col-md-6'
                     },
+                    {
+                        name: 'birthday',
+                        type: 'date',
+                        id: 'birthday',
+                        placeholder: 'birthday',
+                        label: 'Birthday',
+                        typeInput: 'date',
+                        validationRules: { required },
+                        class: 'col-md-4'
+                    }
+                ],
+                Family: [
                     {
                         name: 'civilStatus',
                         type: 'text',
                         id: 'civilStatus',
                         placeholder: 'Civil Status',
                         label: 'Civil Status',
-                        validationRules: { required, sameAs: "user" },
+                        validationRules: { required},
                         typeInput: 'select',
                         options: [
                             {
-                                value: 1,
-                                label: 'soltero'
+                                value: 'soltero',
+                                label: 'Soltero'
                             },
                             {
-                                value: 1,
-                                label: 'casado'
+                                value: 'casado',
+                                label: 'Casado'
                             },
                             {
-                                value: 1,
-                                label: 'union libre'
+                                value: 'unionlibre',
+                                label: 'Unión Libre'
                             }
-                        ]
-                    },
-                    {
-                        name: 'birthday',
-                        type: 'text',
-                        id: 'birthday',
-                        placeholder: 'birthday',
-                        label: 'Birthday',
-                        validationRules: { required },
-                        typeInput: 'date'
-                    },
-                    {
-                        name: 'confPassword',
-                        type: 'password',
-                        id: 'confPassword',
-                        placeholder: 'Confirm Password',
-                        label: 'Confirm Password',
-                        validationRules: { required, sameAs: "password" }
+                        ],
+                        class: 'col-md-6'
                     }
-                ],
-                Family: [
-
+                    ,
                 ],
                 Labor: [
 
@@ -146,6 +150,7 @@ export default {
     methods: {
         handleSubmitForm(v$, state) {
             v$.$validate()
+            console.log(state);
             // document.getElementById('btnSubmit').disable = true;
             // if (!v$.$error && !v$.$invalid) {
             //   console.log(variables.MONGOAPI + "Client/Register");
@@ -182,7 +187,7 @@ export default {
     
 <style>
 .custom-tam {
-    width: 35%;
+    width: 100%;
 }
 </style>
     

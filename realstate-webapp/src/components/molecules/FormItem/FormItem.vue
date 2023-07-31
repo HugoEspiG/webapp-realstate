@@ -1,16 +1,23 @@
 <template>
-    <div>
-        <form @submit.prevent="submitfunction" :id="formId" class="mt-5 col mx-4">
-            <div v-for="(field, index) in fields" :key="index">
-                <InputItem v-if="field.typeInput === 'input'" v-model.trim="state[field.name]" :type="field.type"
-                    :id="field.id" :placeholder="field.placeholder" :label="field.label" :error="v$[field.name].$error"
-                    :errorMessage="getErrorMessage(field.name)" />
-                <SelectItem v-else-if="field.typeInput === 'select'" v-model.trim="state[field.name]" :id="field.id"
-                    :options="field.options" :label="field.label" :error="v$[field.name].$error"
-                    :errorMessage="getErrorMessage(field.name)" />
-                <DatePickerItem v-else-if="field.typeInput === 'date'" v-model.trim="state[field.name]" :label="field.label"
-                    :error="v$[field.name].$error" :errorMessage="getErrorMessage(field.name)"
-                    :datePickerConfig="field.datePickerConfig"></DatePickerItem>
+    <div class="container mt-5">
+        <form @submit.prevent="submitfunction" :id="formId">
+            <div class="row justify-content-center">
+                <div v-for="(field, index) in fields" :key="index" :class="field.class">
+                    <InputItem v-if="field.typeInput === 'input'" v-model.trim="state[field.name]" :type="field.type"
+                        :id="field.id" :placeholder="field.placeholder" :label="field.label" :error="v$[field.name].$error"
+                        :errorMessage="getErrorMessage(field.name)" />
+                    <SelectItem v-else-if="field.typeInput === 'select'" v-model.trim="state[field.name]" :id="field.id"
+                        :options="field.options" :label="field.label" :error="v$[field.name].$error"
+                        :errorMessage="getErrorMessage(field.name)" />
+                    <div v-if="showPartnerFields" class="col-md-6">
+                        <InputItem v-model.trim="state.partnerName" type="text"
+                        id="partnerName" placeholder="Partner's Name" label="Partner's Name" :error="v$[field.name].$error"
+                        :errorMessage="getErrorMessage(field.name)" />
+                    </div>
+                    <DatePickerItem v-else-if="field.typeInput === 'date'" v-model.trim="state[field.name]"
+                        :type="field.type" :id="field.id" :error="v$[field.name].$error"
+                        :errorMessage="getErrorMessage(field.name)" />
+                </div>
             </div>
         </form>
         <Button @click="submitfunction" :variant="submitButtonVariant" :size="submitButtonSize" :class="submitButtonClass"
@@ -35,7 +42,8 @@ export default {
         Button,
         InputItem,
         SelectItem,
-        DatePickerItem
+        DatePickerItem,
+        InputItem
     },
     props: {
         fields: {
@@ -98,12 +106,17 @@ export default {
             console.log(validationRules);
             return validationRules
         })
-
         const v$ = useVuelidate(rules, state)
 
+        const showPartnerFields = computed(() => {
+            console.log();
+            return state.civilStatus === 'casado' || state.civilStatus === 'unionlibre';
+        });
+        console.log(state);
         return {
             state,
-            v$
+            v$,
+            showPartnerFields
         }
     },
     methods: {

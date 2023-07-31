@@ -1,62 +1,61 @@
 <template>
-    <div class="form-floating mt-3 col-10 mx-auto">
-      <date-picker v-model="internalValue" :config="datePickerConfig"></date-picker>
-      <label>{{ label }}</label>
-      <small v-if="error" class="error-message">{{ errorMessage }}</small>
-    </div>
-  </template>
-  
-  <script>
-  import { defineComponent } from 'vue';
-  // import DatePicker from 'vue-datepicker';
-  
-  // export default defineComponent({
-  //   name: 'DatePickerItem',
-  //   components: {
-  //     DatePicker
-  //   },
-  //   props: {
-  //     modelValue: {
-  //       type: [String, Date],
-  //       required: true
-  //     },
-  //     label: {
-  //       type: String,
-  //       default: ''
-  //     },
-  //     error: {
-  //       type: Boolean,
-  //       default: false
-  //     },
-  //     errorMessage: {
-  //       type: String,
-  //       default: ''
-  //     },
-  //     datePickerConfig: {
-  //       type: Object,
-  //       default: () => ({}),
-  //     },
-  //   },
-  //   emits: ['update:modelValue'],
-  //   data() {
-  //     return {
-  //       internalValue: this.modelValue
-  //     };
-  //   },
-  //   watch: {
-  //     internalValue(newValue) {
-  //       this.$emit('update:modelValue', newValue);
-  //     },
-  //     modelValue(newValue) {
-  //       this.internalValue = newValue;
-  //     }
-  //   }
-  // });
-  </script>
-  
-  <style scoped>
-  .error-message {
-    color: red;
+  <div class="form-floating mt-3">
+    <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" class="form-control" :placeholder="$props.placeholder" min="1900-01-01" max="2005-12-31"/>
+    <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'InputItem',
+  props: {
+    modelValue: {
+      type: [String, Number],
+      required: true
+    },
+    type: {
+      type: String,
+      default: 'date'
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    error: {
+      type: Boolean,
+      default: false
+    },
+    errorMessage: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      internalValue: this.modelValue
+    };
+  },
+  watch: {
+    internalValue(newValue) {
+      this.$emit('update:modelValue', newValue);
+    },
+    modelValue(newValue) {
+      this.internalValue = newValue;
+    }
   }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.error-message {
+  color: red;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="form-floating mt-3 col-10 mx-auto">
+    <div class="form-floating mt-3">
       <select v-model="internalValue" :id="id" class="form-select">
         <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
       </select>

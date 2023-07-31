@@ -2,10 +2,9 @@
   <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
     <div class="card-body">
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
-      <div class="col">
-        <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmitForm"/>
-      </div>
+      <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
+        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
+        :handleSubmitForm="handleSubmitForm" />
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
     <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
@@ -36,7 +35,8 @@ export default {
           placeholder: 'Name',
           label: 'Name',
           validationRules: { required },
-          typeInput: 'input'
+          typeInput: 'input',
+          class: 'col-md-8'
         },
         {
           name: 'user',
@@ -45,16 +45,8 @@ export default {
           placeholder: 'Username',
           label: 'Username',
           validationRules: { required, email },
-          typeInput: 'input'
-        },
-        {
-          name: 'confUser',
-          type: 'text',
-          id: 'confUser',
-          placeholder: 'Confirm email',
-          label: 'Confirm email',
-          validationRules: { required, sameAs:"user"},
-          typeInput: 'input'
+          typeInput: 'input',
+          class: 'col-md-8'
         },
         {
           name: 'password',
@@ -63,7 +55,8 @@ export default {
           placeholder: 'Password',
           label: 'Password',
           validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
-          typeInput: 'input'
+          typeInput: 'input',
+          class: 'col-md-6'
         },
         {
           name: 'confPassword',
@@ -71,8 +64,9 @@ export default {
           id: 'confPassword',
           placeholder: 'Confirm Password',
           label: 'Confirm Password',
-          validationRules: { required, sameAs:"password"},
-          typeInput: 'input'
+          validationRules: { required, sameAs: "password" },
+          typeInput: 'input',
+          class: 'col-md-6'
         }
       ],
       submitButtonVariant: 'primary',
@@ -81,7 +75,7 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm(v$,state) {
+    handleSubmitForm(v$, state) {
       v$.$validate()
       // document.getElementById('btnSubmit').disable = true;
       // if (!v$.$error && !v$.$invalid) {
@@ -119,7 +113,7 @@ export default {
   
 <style>
 .custom-tam {
-  width: 35%;
+  width: 80%;
 }
 </style>
   
