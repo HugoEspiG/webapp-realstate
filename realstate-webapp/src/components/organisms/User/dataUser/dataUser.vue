@@ -3,9 +3,7 @@
         <div>
             <div class="card-body">
                 <PItem variant="fs-3" color="dark" class="my-2 card-title">Personal Info</PItem>
-                <FormItem :fields="formFields.Personal" formId="form-pInfo" :submitButtonVariant="submitButtonVariant"
-                    :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-                    :handleSubmitForm="handleSubmitForm" />
+                <FormItem :fields="formFields.Personal" formId="form-per" :submitCallback="handleSubmitForm"  />
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
             <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
@@ -14,9 +12,7 @@
             <div class="card-body">
                 <PItem variant="fs-3" color="dark" class="my-2 card-title">Family</PItem>
                 <div class="col">
-                    <FormItem :fields="formFields.Family" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-                        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-                        :handleSubmitForm="handleSubmitForm" />
+                    <FormItem :fields="formFields.Family" formId="form-fam" :submitCallback="handleSubmitForm"  />
                 </div>
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -26,9 +22,7 @@
             <div class="card-body">
                 <PItem variant="fs-3" color="dark" class="my-2 card-title">Labor</PItem>
                 <div class="col">
-                    <FormItem :fields="formFields.Labor" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-                        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-                        :handleSubmitForm="handleSubmitForm" />
+                    <FormItem :fields="formFields.Labor" formId="form-lab" :submitCallback="handleSubmitForm"  />
                 </div>
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -38,14 +32,16 @@
             <div class="card-body">
                 <PItem variant="fs-3" color="dark" class="my-2 card-title">Hobbies</PItem>
                 <div class="col">
-                    <FormItem :fields="formFields.Hobbies" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-                        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-                        :handleSubmitForm="handleSubmitForm" />
+                    <FormItem :fields="formFields.Hobbies" formId="form-hob " :submitCallback="handleSubmitForm"  />
                 </div>
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
             <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
         </div>
+        <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize"
+          :class="submitButtonClass">
+          Login
+        </Button>
     </div>
 </template>
     
@@ -144,12 +140,11 @@ export default {
             },
             submitButtonVariant: 'primary',
             submitButtonSize: 'lg',
-            submitButtonClass: 'mt-3 mw-25'
+            submitButtonClass: 'mt-3 mw-25',
         };
     },
     methods: {
         handleSubmitForm(v$, state) {
-            v$.$validate()
             console.log(state);
             // document.getElementById('btnSubmit').disable = true;
             // if (!v$.$error && !v$.$invalid) {

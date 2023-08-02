@@ -10,9 +10,9 @@
                         :options="field.options" :label="field.label" :error="v$[field.name].$error"
                         :errorMessage="getErrorMessage(field.name)" />
                     <div v-if="showPartnerFields" class="col-md-6">
-                        <InputItem v-model.trim="state.partnerName" type="text"
-                        id="partnerName" placeholder="Partner's Name" label="Partner's Name" :error="v$[field.name].$error"
-                        :errorMessage="getErrorMessage(field.name)" />
+                        <InputItem v-model.trim="state.partnerName" type="text" id="partnerName"
+                            placeholder="Partner's Name" label="Partner's Name" :error="v$[field.name].$error"
+                            :errorMessage="getErrorMessage(field.name)" />
                     </div>
                     <DatePickerItem v-else-if="field.typeInput === 'date'" v-model.trim="state[field.name]"
                         :type="field.type" :id="field.id" :error="v$[field.name].$error"
@@ -20,10 +20,6 @@
                 </div>
             </div>
         </form>
-        <Button @click="submitfunction" :variant="submitButtonVariant" :size="submitButtonSize" :class="submitButtonClass"
-            :type="submitButtonType" :form="formId">
-            {{ submitButtonText }}
-        </Button>
     </div>
 </template>
   
@@ -54,27 +50,7 @@ export default {
             type: String,
             required: true
         },
-        submitButtonVariant: {
-            type: String,
-            default: 'primary'
-        },
-        submitButtonSize: {
-            type: String,
-            default: 'lg'
-        },
-        submitButtonClass: {
-            type: String,
-            default: ''
-        },
-        submitButtonType: {
-            type: String,
-            default: 'submit'
-        },
-        submitButtonText: {
-            type: String,
-            default: 'Submit'
-        },
-        handleSubmitForm: {
+        submitCallback: {
             type: Function,
             required: true
         }
@@ -103,20 +79,18 @@ export default {
             props.fields.forEach(field => {
                 validationRules[field.name] = field.validationRules
             })
-            console.log(validationRules);
             return validationRules
         })
         const v$ = useVuelidate(rules, state)
 
         const showPartnerFields = computed(() => {
-            console.log();
             return state.civilStatus === 'casado' || state.civilStatus === 'unionlibre';
         });
-        console.log(state);
+
         return {
             state,
             v$,
-            showPartnerFields
+            showPartnerFields,
         }
     },
     methods: {
@@ -128,7 +102,8 @@ export default {
             return '';
         },
         submitfunction() {
-            this.handleSubmitForm(this.v$, this.state)
+            this.v$.$validate()
+            this.submitCallback(this.v$, this.state)
         }
     }
 };

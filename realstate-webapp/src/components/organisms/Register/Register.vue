@@ -2,9 +2,11 @@
   <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
     <div class="card-body">
       <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
-      <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-        :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass"
-        :handleSubmitForm="handleSubmitForm" />
+      <FormItem :fields="formFields" formId="form-reg" :submitCallback="handleSubmitForm" />
+        <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize"
+          :class="submitButtonClass" form="form-reg">
+          Sign Up
+        </Button>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
     <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
@@ -76,7 +78,7 @@ export default {
   },
   methods: {
     handleSubmitForm(v$, state) {
-      v$.$validate()
+      console.log(state);
       // document.getElementById('btnSubmit').disable = true;
       // if (!v$.$error && !v$.$invalid) {
       //   console.log(variables.MONGOAPI + "Client/Register");
