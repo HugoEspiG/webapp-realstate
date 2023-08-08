@@ -1,9 +1,8 @@
 <template>
   <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
     <div class="card-body">
-      <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
-        <FormItem :fields="formFields" formId="form-log" :submitCallback="handleSubmitForm" />
+        <FormItem :formFields="formFields" formId="form-log" :submitCallback="handleSubmitForm" />
         <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize"
           :class="submitButtonClass" form="form-log">
           Login
@@ -37,24 +36,29 @@ export default {
     return {
       formFields: [
         {
-          name: 'user',
-          type: 'text',
-          id: 'user',
-          placeholder: 'Username',
-          label: 'Username',
-          validationRules: { required, email },
-          typeInput: 'input',
-          class: 'col-12 mb-2'
-        },
-        {
-          name: 'password',
-          type: 'password',
-          id: 'password',
-          placeholder: 'Password',
-          label: 'Password',
-          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
-          typeInput: 'input',
-          class: 'col-12'
+          name: 'Login',
+          fields: [
+            {
+              name: 'user',
+              type: 'text',
+              id: 'user',
+              placeholder: 'Username',
+              label: 'Username',
+              validationRules: { required, email },
+              typeInput: 'input',
+              class: 'col-12 mb-2'
+            },
+            {
+              name: 'password',
+              type: 'password',
+              id: 'password',
+              placeholder: 'Password',
+              label: 'Password',
+              validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+              typeInput: 'input',
+              class: 'col-12'
+            }
+          ]
         }
       ],
       submitButtonVariant: 'primary',
