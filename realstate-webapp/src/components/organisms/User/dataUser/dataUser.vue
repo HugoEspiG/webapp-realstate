@@ -5,7 +5,7 @@
                 <FormItem :formFields="formFields" formId="form-log" :submitCallback="handleSubmitForm" />
                 <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize"
                     :class="submitButtonClass" form="form-log">
-                    Login
+                    Save
                 </Button>
             </div>
             <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
@@ -537,157 +537,142 @@ export default {
                                     label: 'no'
                                 }
                             ],
-                            class: 'col-md-2',
+                            class: 'col-md-4',
                         },
                         {
-                            name: "Futball",
-                            type: 'checkbox',
-                            id: "Futball",
-                            label: "Futball",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Tenis",
-                            type: 'checkbox',
-                            id: "Tenis",
-                            label: "Tenis",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Baloncesto",
-                            type: 'checkbox',
-                            id: "Baloncesto",
-                            label: "Baloncesto",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Baseball",
-                            type: 'checkbox',
-                            id: "Baseball",
-                            label: "Baseball",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Golf",
-                            type: 'checkbox',
-                            id: "Golf",
-                            label: "Golf",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Voleyball",
-                            type: 'checkbox',
-                            id: "Voleyball",
-                            label: "Voleyball",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Ciclismo",
-                            type: 'checkbox',
-                            id: "Ciclismo",
-                            label: "Ciclismo",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Rugby",
-                            type: 'checkbox',
-                            id: "Rugby",
-                            label: "Rugby",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "Natacion",
-                            type: 'checkbox',
-                            id: "Natacion",
-                            label: "Natacion",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: "GYM",
-                            type: 'checkbox',
-                            id: "GYM",
-                            label: "GYM",
-                            validationRules: { },
-                            typeInput: 'checkbox',
-                            class: 'col-md-1',
-                            optional: true,
-                            showCondition: (data) => {
-                                return data.Sport==='yes';
-                            }
-                        },
-                        {
-                            name: 'Literature',
-                            type: 'text',
-                            id: 'Literature',
-                            placeholder: 'Literature',
-                            label: 'Literature',
-                            validationRules: { required },
-                            typeInput: 'select',
-                            options: [
+                            class: 'col-md-6',
+                            checkboxes: [
                                 {
-                                    value: 'yes',
-                                    label: 'yes'
+                                    name: "Futbol",
+                                    type: 'checkbox',
+                                    id: "Futbol",
+                                    label: "Futbol",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
                                 },
                                 {
-                                    value: 'no',
-                                    label: 'no'
-                                }
-                            ],
-                            class: 'col-md-6',
+                                    name: "Tenis",
+                                    type: 'checkbox',
+                                    id: "Tenis",
+                                    label: "Tenis",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Baloncesto",
+                                    type: 'checkbox',
+                                    id: "Baloncesto",
+                                    label: "Baloncesto",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Baseball",
+                                    type: 'checkbox',
+                                    id: "Baseball",
+                                    label: "Baseball",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Golf",
+                                    type: 'checkbox',
+                                    id: "Golf",
+                                    label: "Golf",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Voleyball",
+                                    type: 'checkbox',
+                                    id: "Voleyball",
+                                    label: "Voleyball",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Ciclismo",
+                                    type: 'checkbox',
+                                    id: "Ciclismo",
+                                    label: "Ciclismo",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Rugby",
+                                    type: 'checkbox',
+                                    id: "Rugby",
+                                    label: "Rugby",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Natacion",
+                                    type: 'checkbox',
+                                    id: "Natacion",
+                                    label: "Natacion",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "GYM",
+                                    type: 'checkbox',
+                                    id: "GYM",
+                                    label: "GYM",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Sport === 'yes';
+                                    }
+                                },
+                            ]
                         },
                         {
                             name: 'Food',
@@ -707,13 +692,199 @@ export default {
                                     label: 'no'
                                 }
                             ],
-                            class: 'col-md-6',
+                            class: 'col-md-4',
                         },
-
+                        {
+                            class: 'col-md-6',
+                            checkboxes: [
+                                {
+                                    name: "SeaFood",
+                                    type: 'checkbox',
+                                    id: "SeaFood",
+                                    label: "SeaFood",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Itaian",
+                                    type: 'checkbox',
+                                    id: "Italian",
+                                    label: "Italian",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Mexican",
+                                    type: 'checkbox',
+                                    id: "Maxican",
+                                    label: "Mexican",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Chinese",
+                                    type: 'checkbox',
+                                    id: "Chinese",
+                                    label: "Chinese",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Peruvian",
+                                    type: 'checkbox',
+                                    id: "Peruvian",
+                                    label: "Peruvian",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "French",
+                                    type: 'checkbox',
+                                    id: "French",
+                                    label: "French",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Fast",
+                                    type: 'checkbox',
+                                    id: "Fast",
+                                    label: "Fast",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Spain",
+                                    type: 'checkbox',
+                                    id: "Spain",
+                                    label: "Spain",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Arabic",
+                                    type: 'checkbox',
+                                    id: "Arabic",
+                                    label: "Arabic",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Thai",
+                                    type: 'checkbox',
+                                    id: "Thai",
+                                    label: "Thai",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Japanese",
+                                    type: 'checkbox',
+                                    id: "Japanese",
+                                    label: "Japanese",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Korean",
+                                    type: 'checkbox',
+                                    id: "Korean",
+                                    label: "Korean",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Mediterranea",
+                                    type: 'checkbox',
+                                    id: "Mediterranea",
+                                    label: "Mediterranea",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                                {
+                                    name: "Colombian",
+                                    type: 'checkbox',
+                                    id: "Colombian",
+                                    label: "Colombian",
+                                    validationRules: {},
+                                    typeInput: 'checkbox',
+                                    class: 'col-md-6 col-sm-12',
+                                    optional: true,
+                                    showCondition: (data) => {
+                                        return data.Food === 'yes';
+                                    }
+                                },
+                            ]
+                        },
                     ]
                 }
             ],
-            submitButtonVariant: 'primary',
+            submitButtonVariant: 'outline-primary',
             submitButtonSize: 'lg',
             submitButtonClass: 'mt-3 mw-25',
         };

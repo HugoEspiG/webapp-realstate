@@ -1,6 +1,6 @@
 <template>
     <div class="form-check">
-      <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" value="" class="form-check-input" />
+      <input v-model="internalValue" :type="$props.type" :id="$props.id" value="" class="form-check-input" />
       <label :for="$props.id" class="form-check-label">{{ $props.label }}</label>
       <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
     </div>
@@ -11,7 +11,7 @@
     name: 'CheckBoxItem',
     props: {
       modelValue: {
-        type: [String, Number],
+        type: [String, Number, Boolean],
         required: true
       },
       type: {
