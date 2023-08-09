@@ -189,7 +189,7 @@ export default {
                                     label: '4 o mas'
                                 }
                             ],
-                            class: 'col-md-6'
+                            class: 'col-md-8'
                         },
                         {
                             name: 'FamilyType1',
@@ -212,21 +212,503 @@ export default {
                             class: 'col-md-6',
                             optional: true,
                             showCondition: (data) => {
-                                return data.familyMembers>=1;
+                                return data.familyMembers >= 1;
                             }
                         },
-
+                        {
+                            name: "FamilyType1Salary",
+                            type: 'number',
+                            id: "FamilyType1Salary",
+                            placeholder: "Relative's Salary",
+                            label: "Relative's Salary",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FamilyType1 === 'no' && data.familyMembers != 0;
+                            }
+                        },
+                        {
+                            name: 'FamilyType2',
+                            type: 'text',
+                            id: 'FamilyType2',
+                            placeholder: 'Dependent on me',
+                            label: 'Dependent on me',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.familyMembers >= 2;
+                            }
+                        },
+                        {
+                            name: "FamilyType2Salary",
+                            type: 'number',
+                            id: "FamilyType2Salary",
+                            placeholder: "Relative's Salary",
+                            label: "Relative's Salary",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FamilyType2 === 'no' && data.familyMembers > 1;
+                            }
+                        },
+                        {
+                            name: 'FamilyType3',
+                            type: 'text',
+                            id: 'FamilyType3',
+                            placeholder: 'Dependent on me',
+                            label: 'Dependent on me',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.familyMembers >= 3;
+                            }
+                        },
+                        {
+                            name: "FamilyType3Salary",
+                            type: 'number',
+                            id: "FamilyType3Salary",
+                            placeholder: "Relative's Salary",
+                            label: "Relative's Salary",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FamilyType3 === 'no' && data.familyMembers > 2;
+                            }
+                        },
+                        {
+                            name: 'FamilyType4',
+                            type: 'text',
+                            id: 'FamilyType4',
+                            placeholder: 'Dependent on me',
+                            label: 'Dependent on me',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.familyMembers >= 4;
+                            }
+                        },
+                        {
+                            name: "FamilyType4Salary",
+                            type: 'number',
+                            id: "FamilyType3Salary",
+                            placeholder: "Relative's Salary",
+                            label: "Relative's Salary",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FamilyType4 === 'no' && data.familyMembers > 3;
+                            }
+                        },
+                        {
+                            name: 'familyVehicles',
+                            type: 'number',
+                            id: 'familyVehicles',
+                            placeholder: 'Family Car hire',
+                            label: 'Family Car hire',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: '0',
+                                    label: '0'
+                                },
+                                {
+                                    value: '1',
+                                    label: '1'
+                                },
+                                {
+                                    value: '2',
+                                    label: '2'
+                                },
+                                {
+                                    value: '3',
+                                    label: '3'
+                                },
+                                {
+                                    value: '4',
+                                    label: '4 o mas'
+                                }
+                            ],
+                            class: 'col-md-8'
+                        },
                     ]
                 },
                 {
                     name: 'Labor',
                     fields: [
-
+                        {
+                            name: 'Employee',
+                            type: 'text',
+                            id: 'Employee',
+                            placeholder: 'Employee',
+                            label: 'Employee',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                        },
+                        {
+                            name: 'BusinessOwner',
+                            type: 'text',
+                            id: 'BusinessOwner',
+                            placeholder: 'Business Owner',
+                            label: 'Business Owner',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Employee === 'no';
+                            }
+                        },
+                        {
+                            name: "JobEntity",
+                            type: 'text',
+                            id: "JobEntity",
+                            placeholder: "Job Entity",
+                            label: "Job Entity",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Employee === 'yes' || data.BusinessOwner === 'yes';
+                            }
+                        },
+                        {
+                            name: "Salary",
+                            type: 'number',
+                            id: "Salary",
+                            placeholder: "Salary in COP",
+                            label: "Salary in COP",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Employee === 'yes' || data.BusinessOwner === 'yes';
+                            }
+                        },
+                        {
+                            name: "JobTitle",
+                            type: 'text',
+                            id: "JobTitle",
+                            placeholder: "Job Title",
+                            label: "Job Title",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-4',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Employee === 'yes';
+                            }
+                        },
+                        {
+                            name: 'FinancialObligations',
+                            type: 'text',
+                            id: 'FinancialObligations',
+                            placeholder: 'Financial Obligations',
+                            label: 'Financial Obligations',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                        },
+                        {
+                            name: "FinancialObligationsReason",
+                            type: 'text',
+                            id: "FinancialObligationsReason",
+                            placeholder: "Financial Obligations Reason",
+                            label: "Financial Obligations Reason",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FinancialObligations === 'yes';
+                            }
+                        },
+                        {
+                            name: "FinancialObligationsQuantity",
+                            type: 'number',
+                            id: "FinancialObligationsQuantity",
+                            placeholder: "Financial Obligations Quantity in COP",
+                            label: "Financial Obligations Quantity in COP",
+                            validationRules: { required },
+                            typeInput: 'input',
+                            class: 'col-md-6',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.FinancialObligations === 'yes';
+                            }
+                        },
                     ]
                 },
                 {
                     name: 'Hobbies',
                     fields: [
+                        {
+                            name: 'Sport',
+                            type: 'text',
+                            id: 'Sport',
+                            placeholder: 'Sports',
+                            label: 'Sports',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-2',
+                        },
+                        {
+                            name: "Futball",
+                            type: 'checkbox',
+                            id: "Futball",
+                            label: "Futball",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Tenis",
+                            type: 'checkbox',
+                            id: "Tenis",
+                            label: "Tenis",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Baloncesto",
+                            type: 'checkbox',
+                            id: "Baloncesto",
+                            label: "Baloncesto",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Baseball",
+                            type: 'checkbox',
+                            id: "Baseball",
+                            label: "Baseball",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Golf",
+                            type: 'checkbox',
+                            id: "Golf",
+                            label: "Golf",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Voleyball",
+                            type: 'checkbox',
+                            id: "Voleyball",
+                            label: "Voleyball",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Ciclismo",
+                            type: 'checkbox',
+                            id: "Ciclismo",
+                            label: "Ciclismo",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Rugby",
+                            type: 'checkbox',
+                            id: "Rugby",
+                            label: "Rugby",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "Natacion",
+                            type: 'checkbox',
+                            id: "Natacion",
+                            label: "Natacion",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: "GYM",
+                            type: 'checkbox',
+                            id: "GYM",
+                            label: "GYM",
+                            validationRules: { },
+                            typeInput: 'checkbox',
+                            class: 'col-md-1',
+                            optional: true,
+                            showCondition: (data) => {
+                                return data.Sport==='yes';
+                            }
+                        },
+                        {
+                            name: 'Literature',
+                            type: 'text',
+                            id: 'Literature',
+                            placeholder: 'Literature',
+                            label: 'Literature',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                        },
+                        {
+                            name: 'Food',
+                            type: 'text',
+                            id: 'Food',
+                            placeholder: 'Food',
+                            label: 'Food',
+                            validationRules: { required },
+                            typeInput: 'select',
+                            options: [
+                                {
+                                    value: 'yes',
+                                    label: 'yes'
+                                },
+                                {
+                                    value: 'no',
+                                    label: 'no'
+                                }
+                            ],
+                            class: 'col-md-6',
+                        },
 
                     ]
                 }

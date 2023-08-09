@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'InputItem',
+  name: 'DatePickerItem',
   props: {
     modelValue: {
       type: [String, Number],

@@ -1,14 +1,14 @@
 <template>
-    <div class="form-floating mt-3">
-      <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" class="form-control" :placeholder="$props.placeholder" />
-      <label :for="$props.id">{{ $props.label }}</label>
+    <div class="form-check">
+      <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" value="" class="form-check-input" />
+      <label :for="$props.id" class="form-check-label">{{ $props.label }}</label>
       <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'InputItem',
+    name: 'CheckBoxItem',
     props: {
       modelValue: {
         type: [String, Number],
@@ -21,10 +21,6 @@
       id: {
         type: String,
         required: true
-      },
-      placeholder: {
-        type: String,
-        default: ''
       },
       label: {
         type: String,

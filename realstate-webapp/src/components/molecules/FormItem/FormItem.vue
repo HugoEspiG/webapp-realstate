@@ -14,17 +14,22 @@
                         <DatePickerItem v-else-if="field.typeInput === 'date' && !field.optional"
                             v-model.trim="state[field.name]" :type="field.type" :id="field.id"
                             :error="v$[field.name].$error" :errorMessage="getErrorMessage(field.name)" />
+                        <CheckBoxItem v-else-if="field.typeInput === 'checkbox' && !field.optional"
+                            v-model.trim="state[field.name]" :type="field.type" :id="field.id" :label="field.label"
+                            :error="v$[field.name].$error" :errorMessage="getErrorMessage(field.name)" />
                         <div v-if="field.optional && field.showCondition(state)">
                             <InputItem v-if="field.typeInput === 'input'" v-model.trim="state[field.name]"
                                 :type="field.type" :id="field.name" :placeholder="field.placeholder" :label="field.label"
                                 :error="v$[field.name].$error" :errorMessage="getErrorMessage(field.name)" />
-                            <SelectItem v-else-if="field.typeInput === 'select'"
-                                v-model.trim="state[field.name]" :id="field.id" :options="field.options"
-                                :label="field.label" :error="v$[field.name].$error"
+                            <SelectItem v-else-if="field.typeInput === 'select'" v-model.trim="state[field.name]"
+                                :id="field.id" :options="field.options" :label="field.label" :error="v$[field.name].$error"
                                 :errorMessage="getErrorMessage(field.name)" />
                             <DatePickerItem v-else-if="field.typeInput === 'date'" v-model.trim="state[field.name]"
                                 :type="field.type" :id="field.id" :error="v$[field.name].$error"
                                 :errorMessage="getErrorMessage(field.name)" />
+                            <CheckBoxItem v-else-if="field.typeInput === 'checkbox'" v-model.trim="state[field.name]"
+                                :type="field.type" :id="field.name" :placeholder="field.placeholder" :label="field.label"
+                                :error="v$[field.name].$error" :errorMessage="getErrorMessage(field.name)" />
                         </div>
                     </div>
                 </div>
@@ -39,20 +44,25 @@ import PItem from '../../atoms/PItem/PItem.vue';
 import Button from '../../atoms/Button/Button.vue';
 import SelectItem from '../../atoms/SelectItem/SelecItem.vue'
 import DatePickerItem from '../../atoms/DatePickerItem/DatePickerItem.vue';
+import CheckBoxItem from '../../atoms/CheckBoxItem/CheckBoxItem.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { reactive, computed } from 'vue';
 import { sameAs } from '@vuelidate/validators';
 
+
 export default {
     name: 'FormItem',
     components: {
-        Button,
-        InputItem,
-        SelectItem,
-        DatePickerItem,
-        InputItem,
-        PItem
-    },
+    Button,
+    InputItem,
+    SelectItem,
+    DatePickerItem,
+    InputItem,
+    CheckBoxItem,
+    PItem,
+    CheckBoxItem,
+    CheckBoxItem
+},
     props: {
         formFields: {
             type: Array,
