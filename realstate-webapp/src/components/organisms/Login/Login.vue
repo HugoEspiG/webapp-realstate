@@ -67,23 +67,24 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm(v$, state) {
-      console.log(state);
-      console.log(v$.$error);
-      // if (!v$.$error && !v$.$invalid) {
-      //   ;
-      //   axios.post(variables.MONGOAPI + "Client/Login", {
-      //     Email: state.user,
-      //     Password: state.password
-      //   }).then((response) => {
-      //     console.log(response.data);
-      //     //window.localStorage.setItem("token",response.data);
-      //   }).catch(e => console.log(e.response));
-      // } else {
-      // }
+    async handleSubmit(v,state) {
+      if (!v.$error && !v.$invalid) {;
+        axios.post("Client/Login", {
+          Email: state.user,
+          Password: state.password
+        }).then((response) => {
+          window.sessionStorage.setItem('rs-device',JSON.stringify({"data":response.data.value, "pid":response.data.user}));
+          this.$store.dispatch('user',response.data.user);
+          this.$router.push("/");
+        }).catch(e=> console.log(e.response));
+      } else {
+      }
     }
+      
+
+    
   }
-};
+}
 </script>
 
 

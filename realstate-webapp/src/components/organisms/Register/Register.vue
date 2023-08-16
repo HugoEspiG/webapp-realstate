@@ -13,6 +13,7 @@
 </template>
   
 <script>
+import axios from 'axios'
 import InputItem from '../../atoms/InputItem/InputItem.vue'
 import Button from '../../atoms/Button/Button.vue'
 import PItem from '../../atoms/PItem/PItem.vue'
@@ -80,37 +81,36 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm(v$, state) {
-      console.log(state);
-      // document.getElementById('btnSubmit').disable = true;
-      // if (!v$.$error && !v$.$invalid) {
-      //   console.log(variables.MONGOAPI + "Client/Register");
-      //   axios.post(variables.MONGOAPI + "Client/Register", {
-      //     Email: state.user,
-      //     Password: state.password
-      //   }).then((response) => {
-      //     console.log(response.status);
-      //     document.getElementById("SubmitOk").innerHTML = response.data;
-      //     document.getElementById("SubmitOk").removeAttribute("hidden");
-      //     setTimeout(() => {
-      //       document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
-      //     }, 1500);
-      //     this.$router.push('/login');
-      //   }).catch(e => {
-      //     document.getElementById("SubmitFail").innerHTML = e.response.data;
-      //     document.getElementById("SubmitFail").removeAttribute("hidden");
-      //     setTimeout(() => {
-      //       document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-      //     }, 1500);
-      //   })
-      // } else {
-      //   document.getElementById("SubmitFail").innerHTML = "Data does not match";
-      //   document.getElementById("SubmitFail").removeAttribute("hidden");
-      //   setTimeout(() => {
-      //     document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
-      //   }, 1500);
-      // }
-      // document.getElementById('btnSubmit').disable = false;
+    submitfunction(v,state) {
+      //console.log(this.v$);
+      if (!v.$error && !v.$invalid) {
+        axios.post("Client/Register", {
+          Name:state.name,
+          Email: state.user,
+          Password: state.password,
+          Rol:"Client"
+        }).then((response) => {
+          console.log(response.status);
+          document.getElementById("SubmitOk").innerHTML = response.data;
+          document.getElementById("SubmitOk").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitOk").setAttribute("hidden", "hidden");
+          }, 1500);
+          this.$router.push('/login');
+        }).catch(e => {
+          document.getElementById("SubmitFail").innerHTML = e.response.data;
+          document.getElementById("SubmitFail").removeAttribute("hidden");
+          setTimeout(() => {
+            document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+          }, 1500);
+        })
+      } else {
+        document.getElementById("SubmitFail").innerHTML = "Data does not match";
+        document.getElementById("SubmitFail").removeAttribute("hidden");
+        setTimeout(() => {
+          document.getElementById("SubmitFail").setAttribute("hidden", "hidden");
+        }, 1500);
+      }
     }
   }
 };

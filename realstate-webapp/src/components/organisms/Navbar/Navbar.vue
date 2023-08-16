@@ -39,8 +39,19 @@
   
   
 <script>
+import {mapGetters} from 'vuex'
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    methods:{
+        handleClick(){
+            sessionStorage.removeItem('rs-device');
+            this.$store.dispatch('user',null);
+            this.$router.push('/')
+        }
+    },
+    computed:{
+        ...mapGetters(['user'])
+    }
 }
 </script>
   

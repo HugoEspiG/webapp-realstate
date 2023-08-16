@@ -7,3 +7,7 @@ import User from '../components/organisms/User/User.vue';
             <User></User>
         </div>
 </template>
+
+<script setup>
+import Userview from '../components/organisms/User/User.vue';
+</script>
