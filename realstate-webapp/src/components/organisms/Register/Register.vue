@@ -1,11 +1,11 @@
 <template>
   <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
     <div class="card-body">
-      <PItem variant="fs-3" color="dark" class="my-2 card-title">Sign up</PItem>
-      <div class="col">
-        <FormItem :fields="formFields" formId="form-reg" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="submitfunction"/>
-      </div>
+      <FormItem :formFields="formFields" formId="form-reg" :submitCallback="handleSubmitForm" />
+      <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize" :class="submitButtonClass"
+        form="form-reg">
+        Sign Up
+      </Button>
     </div>
     <div id="SubmitOk" class="alert alert-success alert-dimissible fade show" role="alert" hidden></div>
     <div id="SubmitFail" class="alert alert-danger" role="alert" hidden></div>
@@ -31,49 +31,48 @@ export default {
     return {
       formFields: [
         {
-          name: 'name',
-          type: 'text',
-          id: 'name',
-          placeholder: 'Name',
-          label: 'Name',
-          validationRules: { required },
-          typeInput: 'input'
-        },
-        {
-          name: 'user',
-          type: 'text',
-          id: 'user',
-          placeholder: 'Username',
-          label: 'Username',
-          validationRules: { required, email },
-          typeInput: 'input'
-        },
-        {
-          name: 'confUser',
-          type: 'text',
-          id: 'confUser',
-          placeholder: 'Confirm email',
-          label: 'Confirm email',
-          validationRules: { required},
-          typeInput: 'input'
-        },
-        {
-          name: 'password',
-          type: 'password',
-          id: 'password',
-          placeholder: 'Password',
-          label: 'Password',
-          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
-          typeInput: 'input'
-        },
-        {
-          name: 'confPassword',
-          type: 'password',
-          id: 'confPassword',
-          placeholder: 'Confirm Password',
-          label: 'Confirm Password',
-          validationRules: { required},
-          typeInput: 'input'
+          name: 'Sign up',
+          fields: [{
+            name: 'name',
+            type: 'text',
+            id: 'name',
+            placeholder: 'Name',
+            label: 'Name',
+            validationRules: { required },
+            typeInput: 'input',
+            class: 'col-md-8'
+          },
+          {
+            name: 'user',
+            type: 'text',
+            id: 'user',
+            placeholder: 'Username',
+            label: 'Username',
+            validationRules: { required, email },
+            typeInput: 'input',
+            class: 'col-md-8'
+          },
+          {
+            name: 'password',
+            type: 'password',
+            id: 'password',
+            placeholder: 'Password',
+            label: 'Password',
+            validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+            typeInput: 'input',
+            class: 'col-md-6'
+          },
+          {
+            name: 'confPassword',
+            type: 'password',
+            id: 'confPassword',
+            placeholder: 'Confirm Password',
+            label: 'Confirm Password',
+            validationRules: { required, sameAs: "password" },
+            typeInput: 'input',
+            class: 'col-md-6'
+          }
+          ]
         }
       ],
       submitButtonVariant: 'primary',
@@ -82,12 +81,8 @@ export default {
     };
   },
   methods: {
-
-
-
     submitfunction(v,state) {
       //console.log(this.v$);
-      v.$validate()
       if (!v.$error && !v.$invalid) {
         axios.post("Client/Register", {
           Name:state.name,
@@ -123,7 +118,7 @@ export default {
   
 <style>
 .custom-tam {
-  width: 35%;
+  width: 80%;
 }
 </style>
   

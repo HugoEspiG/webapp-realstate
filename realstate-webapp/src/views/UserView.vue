@@ -1,10 +1,10 @@
-<!--<script setup>
+<script setup>
 import User from '../components/organisms/User/User.vue';
-</script>-->
+</script>
 
 <template>
         <div class="container">
-          <Userview></Userview>
+            <User></User>
         </div>
 </template>
 

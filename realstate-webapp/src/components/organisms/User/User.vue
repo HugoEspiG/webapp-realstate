@@ -1,20 +1,23 @@
 <template>
-    <section style="background-color: #eee;">
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
-            <div style="display: flex; justify-content: center;">
-              <span>
-                <span id="NameSpan" class="my-3" >
-                  {{ user.Name }}
-                </span>
-                #{{ user.ClientId }}
-              </span>
-              <button id="buttonIdName" @click="handleName()" style="display: inline; background-color: rgba(255, 255, 255, 0.1); border: none; "><i id="buttonIdNameIcon" class="bi bi-pencil-square"></i></button>
+    <div class="mt-2">
+        <p class="fs-1">Bienvenido {{ $route.params.id }}</p>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Foto</p>
+            </div>
+            <div class="col-md-8">
+                <div>
+                    <p class="fs-3 mx-auto">Propiedades mas recientes encontradas para ti</p>
+                </div>
+                <div class="prueba">
+                    <p class="fs-3">Tus datos personales</p>
+                    <div class="text-end">
+                        Aca ira toda la info
+                    </div>
+                    <Button @click="edit" variant="primary" size="lg" class="mt-2 text-end">
+                        Editar
+                    </Button>
+                </div>
             </div>
             <p class="my-3" style="font-weight: bold;">{{user.Rol}}</p>
           </div>
@@ -305,6 +308,8 @@
   </div>
 </section>
 </template>
+
+
 <script>
 
 import InputItem from '../../atoms/InputItem/InputItem.vue'

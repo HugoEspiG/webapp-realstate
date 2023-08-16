@@ -1,28 +1,30 @@
 <template>
     <div class="form-floating mt-3">
-      <select v-model="internalValue" :id="id" class="form-select">
-        <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
-      </select>
-      <label :for="id">{{ label }}</label>
-      <small v-if="error" class="error-message">{{ errorMessage }}</small>
+      <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" class="form-control" :placeholder="$props.placeholder" />
+      <label :for="$props.id">{{ $props.label }}</label>
+      <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'SelectItem',
+    name: 'InputItem',
     props: {
       modelValue: {
         type: [String, Number],
         required: true
       },
+      type: {
+        type: String,
+        default: 'text'
+      },
       id: {
         type: String,
         required: true
       },
-      options: {
-        type: Array,
-        required: true
+      placeholder: {
+        type: String,
+        default: ''
       },
       label: {
         type: String,
@@ -58,4 +60,5 @@
     color: red;
   }
   </style>
+  
   

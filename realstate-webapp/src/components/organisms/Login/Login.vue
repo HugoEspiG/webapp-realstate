@@ -1,10 +1,12 @@
 <template>
   <div class="card mb-3 text-center mt-5 mx-auto shadow-lg custom-tam">
     <div class="card-body">
-      <PItem variant="fs-3" color="dark" class="my-2 card-title">Log in</PItem>
       <div class="col">
-        <FormItem :fields="formFields" formId="form-log" :submitButtonVariant="submitButtonVariant"
-          :submitButtonSize="submitButtonSize" :submitButtonClass="submitButtonClass" :handleSubmitForm="handleSubmit" />
+        <FormItem :formFields="formFields" formId="form-log" :submitCallback="handleSubmitForm" />
+        <Button @click="handleSubmitForm" :variant="submitButtonVariant" :size="submitButtonSize"
+          :class="submitButtonClass" form="form-log">
+          Login
+        </Button>
         <PItem variant="fs-5" color="dark" class="my-2">
           ¿Aún no estás registrado? <RouterLink to="/register"> Registrate</RouterLink>
         </PItem>
@@ -34,22 +36,29 @@ export default {
     return {
       formFields: [
         {
-          name: 'user',
-          type: 'text',
-          id: 'user',
-          placeholder: 'Username',
-          label: 'Username',
-          validationRules: { required, email },
-          typeInput: 'input'
-        },
-        {
-          name: 'password',
-          type: 'password',
-          id: 'password',
-          placeholder: 'Password',
-          label: 'Password',
-          validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
-          typeInput: 'input'
+          name: 'Login',
+          fields: [
+            {
+              name: 'user',
+              type: 'text',
+              id: 'user',
+              placeholder: 'Username',
+              label: 'Username',
+              validationRules: { required, email },
+              typeInput: 'input',
+              class: 'col-12 mb-2'
+            },
+            {
+              name: 'password',
+              type: 'password',
+              id: 'password',
+              placeholder: 'Password',
+              label: 'Password',
+              validationRules: { required, minLength: minLength(6), maxLength: maxLength(20) },
+              typeInput: 'input',
+              class: 'col-12'
+            }
+          ]
         }
       ],
       submitButtonVariant: 'primary',
@@ -59,7 +68,6 @@ export default {
   },
   methods: {
     async handleSubmit(v,state) {
-      v.$validate()
       if (!v.$error && !v.$invalid) {;
         axios.post("Client/Login", {
           Email: state.user,

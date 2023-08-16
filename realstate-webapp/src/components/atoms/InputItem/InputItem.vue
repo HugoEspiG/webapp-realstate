@@ -1,5 +1,5 @@
 <template>
-  <div class="form-floating mt-3 col-10 mx-auto">
+  <div class="form-floating mt-3">
     <input v-model.trim="internalValue" :type="$props.type" :id="$props.id" class="form-control" :placeholder="$props.placeholder" />
     <label :for="$props.id">{{ $props.label }}</label>
     <small v-if="$props.error" class="error-message">{{ $props.errorMessage}}</small>
