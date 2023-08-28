@@ -1,23 +1,21 @@
 <template>
   <header>
-    <!-- <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav> -->
     <Navbar />
   </header>
-
-  <RouterView  />
+  <RouterView/>
+  <Footer/>
 </template>
 
 <script >
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/organisms/Navbar/Navbar.vue';
+import Footer from './components/organisms/Footer/Footer.vue';
 import axios from 'axios'
 export default{
   name:'App',
   components:{
     Navbar,
+    Footer
   },
   data(){
     return {
