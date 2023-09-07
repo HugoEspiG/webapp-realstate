@@ -10,7 +10,7 @@
                     <li class='mx-2'><a href='https://wa.link/orsxfc' class='bi bi-whatsapp btn btn-outline-primary btn-lg border border-0' role="button"></a></li>
                     <li class='mx-2'><a href='/' class='bi bi-instagram btn btn-outline-primary btn-lg border border-0' role="button"></a></li>
                 </ul>
-                <p class="mb-3 mb-md-0 text-primary">© 2023 NombreCompañia, Inc</p>
+                <p class="mb-3 mb-md-0 text-primary">© 2023 EspacioVital, Inc</p>
             </div>
             <ul class='nav col-md-4 justify-content-end list-unstyled d-flex'>
                 <li><RouterLink to='/' class='text-primary'>

@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    async handleSubmit(v,state) {
+    async handleSubmitForm(v,state) {
       if (!v.$error && !v.$invalid) {;
         axios.post("Client/Login", {
           Email: state.user,

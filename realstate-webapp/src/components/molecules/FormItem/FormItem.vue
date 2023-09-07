@@ -47,7 +47,6 @@
 <script>
 import InputItem from '../../atoms/InputItem/InputItem.vue';
 import PItem from '../../atoms/PItem/PItem.vue';
-import Button from '../../atoms/Button/Button.vue';
 import SelectItem from '../../atoms/SelectItem/SelecItem.vue'
 import DatePickerItem from '../../atoms/DatePickerItem/DatePickerItem.vue';
 import CheckBoxItem from '../../atoms/CheckBoxItem/CheckBoxItem.vue';
@@ -59,7 +58,6 @@ import { sameAs } from '@vuelidate/validators';
 export default {
     name: 'FormItem',
     components: {
-        Button,
         InputItem,
         SelectItem,
         DatePickerItem,
