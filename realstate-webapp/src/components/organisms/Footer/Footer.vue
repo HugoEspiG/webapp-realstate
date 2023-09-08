@@ -1,5 +1,5 @@
 <template>
-        <footer class="d-flex flex-wrap justify-content-between align-items-center p-3 border-top bg-light shadow-lg mt-5">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center p-3 border-top bg-dark shadow-lg mt-5">
             <ul class='nav col-md-4 justify-content-start list-unstyled d-flex'>
                 <li> <p class='text-primary mx-1'> Email: mail</p></li>
                 <li> <p class='text-primary mx-1'> Teléfono: number</p></li>
