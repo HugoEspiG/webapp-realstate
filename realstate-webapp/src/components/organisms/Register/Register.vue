@@ -81,7 +81,7 @@ export default {
     };
   },
   methods: {
-    submitfunction(v,state) {
+    handleSubmitForm(v,state) {
       //console.log(this.v$);
       if (!v.$error && !v.$invalid) {
         axios.post("Client/Register", {

@@ -1,12 +1,19 @@
 <template>
-  <header>
-    
-  </header>
-  <div>
-    <h1>This is an about page</h1>
+  <div class="container">
+    <About />
   </div>
 </template>
 
-<style>
+<script>
+import About from '../components/organisms/About/About.vue';
 
-</style>
+export default {
+  name: "AboutView",
+  components: {
+    About
+  },
+  computed: {
+  }
+
+}
+</script>

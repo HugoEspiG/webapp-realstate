@@ -9,11 +9,31 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <RouterLink to="/" :class="[$route.path === '/' ? 'nav-link active' : 'nav-link']">Follow
+                        <RouterLink to="/" :class="[$route.path === '/' ? 'nav-link active' : 'nav-link']">Comprar
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">About
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Alquilar
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Vender
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Arrendar
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Financieras
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Seguros
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/about" :class="[$route.path === '/about' ? 'nav-link active' : 'nav-link']">Nosotros
                         </RouterLink>
                     </li>
                     <li class="nav-item dropdown">

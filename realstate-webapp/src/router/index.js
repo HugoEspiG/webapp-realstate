@@ -12,9 +12,6 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      meta: {
-        hideForAuth: true
-      },
       component: () => import('../views/LoginView.vue')
     },
     {
@@ -60,6 +57,17 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/dataUserView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/user/:id/data',
+      name: 'dataRegi',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/dataUserRegView.vue'),
       meta: {
         requiresAuth: true
       }

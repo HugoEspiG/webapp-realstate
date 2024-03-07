@@ -112,3 +112,6 @@ D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\Con
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Scrutor.dll
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
 D:\Users\Velasquez\Documents\RealState\webapp-realstate\ConectionMongoClient\ConectionMongoClient\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\hugoa\OneDrive\Documents\GitHub\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ConectionMongoClient.dll
+C:\Users\hugoa\OneDrive\Documents\GitHub\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\refint\ConectionMongoClient.dll
+C:\Users\hugoa\OneDrive\Documents\GitHub\webapp-realstate\ConectionMongoClient\ConectionMongoClient\obj\Debug\net7.0\ConectionMongoClient.pdb
